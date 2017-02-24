@@ -5,7 +5,7 @@
 	<artifactId>springboot-quickstart</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-		<spring.boot.version>1.1.4.RELEASE</spring.boot.version>
+		<spring.boot.version>1.5.1.RELEASE</spring.boot.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -13,6 +13,11 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 			<version>${spring.boot.version}</version>
 		</dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
 	</dependencies>
 	<build>
 		<plugins>
