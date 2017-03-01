@@ -1,4 +1,7 @@
-E:\code\springboot-quickstart\src\main\java\com\yqz\springboot\quickstart\Hello.java
+E:\code\springboot-quickstart\src\main\java\com\yqz\springboot\quickstart\component\App.java
+E:\code\springboot-quickstart\src\main\java\com\yqz\springboot\quickstart\Main.java
 E:\code\springboot-quickstart\src\main\java\com\yqz\springboot\quickstart\package-info.java
-E:\code\springboot-quickstart\src\main\java\com\yqz\springboot\quickstart\App.java
+E:\code\springboot-quickstart\src\main\java\com\yqz\springboot\quickstart\HelloController.java
+E:\code\springboot-quickstart\src\main\java\com\yqz\springboot\quickstart\config\WebMvcConfig.java
+E:\code\springboot-quickstart\src\main\java\com\yqz\springboot\quickstart\service\HelloService.java
 E:\code\springboot-quickstart\src\main\java\com\yqz\springboot\quickstart\MyPackageAnnotation.java
