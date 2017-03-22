@@ -2,18 +2,18 @@ package com.yqz.springboot.quickstart;
 
 import java.util.Arrays;
 
-import javax.servlet.Servlet;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 
+import org.springframework.boot.Banner.Mode;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.util.AntPathMatcher;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import com.yqz.springboot.quickstart.interceptor.CaseInsensitiveRequestParameterNameFilter;
 
 @SpringBootApplication
 public class Main extends SpringBootServletInitializer {
@@ -24,8 +24,39 @@ public class Main extends SpringBootServletInitializer {
 	}
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(Main.class, args);
+		// SpringApplication.run(Main.class, args);
+		new SpringApplicationBuilder().sources(Main.class).properties("spring.config.name=application")
+				.bannerMode(Mode.OFF).run(args);
 	}
+
+	@Override
+	public void onStartup(ServletContext servletContext) throws ServletException {
+		super.onStartup(servletContext);
+
+		/*
+		 * FilterRegistration.Dynamic filter =
+		 * servletContext.addFilter(CaseInsensitiveRequestParameterNameFilter.
+		 * class.getSimpleName(), new
+		 * CaseInsensitiveRequestParameterNameFilter());
+		 * filter.addMappingForUrlPatterns(null, true, "/*");
+		 */
+
+	}
+
+	@Bean
+	public CaseInsensitiveRequestParameterNameFilter caseInsensitiveRequestParameterNameFilter() {
+		return new CaseInsensitiveRequestParameterNameFilter();
+	}
+
+	/*
+	 * @Bean public FilterRegistrationBean filterRegistrationBean() {
+	 * FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+	 * CaseInsensitiveRequestParameterNameFilter filter = new
+	 * CaseInsensitiveRequestParameterNameFilter();
+	 * registrationBean.setFilter(filter); List<String> urlPatterns = new
+	 * ArrayList<String>(); urlPatterns.add("/*");
+	 * registrationBean.setUrlPatterns(urlPatterns); return registrationBean; }
+	 */
 
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
@@ -42,13 +73,4 @@ public class Main extends SpringBootServletInitializer {
 		};
 	}
 
-	@Bean
-	public RequestMappingHandlerMapping requestMappingHandlerMapping() {
-		RequestMappingHandlerMapping mapping = new RequestMappingHandlerMapping();
-		AntPathMatcher pathMatcher = new AntPathMatcher();
-		pathMatcher.setCaseSensitive(false);
-		mapping.setPathMatcher(pathMatcher);
-
-		return mapping;
-	}
 }

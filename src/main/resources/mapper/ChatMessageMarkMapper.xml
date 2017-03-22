@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yqz.springboot.quickstart.mapper.ChatMessageMarkMapper">
+  <resultMap id="BaseResultMap" type="com.yqz.springboot.quickstart.model.po.ChatMessageMark">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="receiver_id" jdbcType="INTEGER" property="receiverId" />
+    <result column="sender_id" jdbcType="INTEGER" property="senderId" />
+    <result column="pushed_chat_message_id" jdbcType="INTEGER" property="pushedChatMessageId" />
+    <result column="max_chat_message_id" jdbcType="INTEGER" property="maxChatMessageId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, receiver_id, sender_id, pushed_chat_message_id, max_chat_message_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chatmessagemark
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from chatmessagemark
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yqz.springboot.quickstart.model.po.ChatMessageMark">
+    insert into chatmessagemark (id, receiver_id, sender_id, 
+      pushed_chat_message_id, max_chat_message_id)
+    values (#{id,jdbcType=INTEGER}, #{receiverId,jdbcType=INTEGER}, #{senderId,jdbcType=INTEGER}, 
+      #{pushedChatMessageId,jdbcType=INTEGER}, #{maxChatMessageId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yqz.springboot.quickstart.model.po.ChatMessageMark">
+    insert into chatmessagemark
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="receiverId != null">
+        receiver_id,
+      </if>
+      <if test="senderId != null">
+        sender_id,
+      </if>
+      <if test="pushedChatMessageId != null">
+        pushed_chat_message_id,
+      </if>
+      <if test="maxChatMessageId != null">
+        max_chat_message_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="receiverId != null">
+        #{receiverId,jdbcType=INTEGER},
+      </if>
+      <if test="senderId != null">
+        #{senderId,jdbcType=INTEGER},
+      </if>
+      <if test="pushedChatMessageId != null">
+        #{pushedChatMessageId,jdbcType=INTEGER},
+      </if>
+      <if test="maxChatMessageId != null">
+        #{maxChatMessageId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yqz.springboot.quickstart.model.po.ChatMessageMark">
+    update chatmessagemark
+    <set>
+      <if test="receiverId != null">
+        receiver_id = #{receiverId,jdbcType=INTEGER},
+      </if>
+      <if test="senderId != null">
+        sender_id = #{senderId,jdbcType=INTEGER},
+      </if>
+      <if test="pushedChatMessageId != null">
+        pushed_chat_message_id = #{pushedChatMessageId,jdbcType=INTEGER},
+      </if>
+      <if test="maxChatMessageId != null">
+        max_chat_message_id = #{maxChatMessageId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yqz.springboot.quickstart.model.po.ChatMessageMark">
+    update chatmessagemark
+    set receiver_id = #{receiverId,jdbcType=INTEGER},
+      sender_id = #{senderId,jdbcType=INTEGER},
+      pushed_chat_message_id = #{pushedChatMessageId,jdbcType=INTEGER},
+      max_chat_message_id = #{maxChatMessageId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
