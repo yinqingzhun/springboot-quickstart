@@ -12,6 +12,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.filter.ShallowEtagHeaderFilter;
 
 import com.yqz.springboot.quickstart.interceptor.CaseInsensitiveRequestParameterNameFilter;
 
@@ -46,6 +47,12 @@ public class Main extends SpringBootServletInitializer {
 	@Bean
 	public CaseInsensitiveRequestParameterNameFilter caseInsensitiveRequestParameterNameFilter() {
 		return new CaseInsensitiveRequestParameterNameFilter();
+	}
+
+	@Bean
+	public ShallowEtagHeaderFilter shallowEtagHeaderFilter() {
+		ShallowEtagHeaderFilter filter = new ShallowEtagHeaderFilter();
+		return filter;
 	}
 
 	/*

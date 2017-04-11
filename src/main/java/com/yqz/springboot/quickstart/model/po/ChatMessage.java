@@ -3,73 +3,74 @@ package com.yqz.springboot.quickstart.model.po;
 import java.util.Date;
 
 public class ChatMessage {
-    private Integer id;
 
-    private Integer senderId;
+	private Integer id;
 
-    private Integer receiverId;
+	private Integer senderId;
 
-    private Byte messageType;
+	private Integer receiverId;
 
-    private String messageJson;
+	private Byte messageType;
 
-    private Date createTime;
+	private String messageJson;
 
-    private Boolean isDel;
+	private Date createTime;
 
-    public Integer getId() {
-        return id;
-    }
+	private Boolean isDel;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Integer getSenderId() {
-        return senderId;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setSenderId(Integer senderId) {
-        this.senderId = senderId;
-    }
+	public Integer getSenderId() {
+		return senderId;
+	}
 
-    public Integer getReceiverId() {
-        return receiverId;
-    }
+	public void setSenderId(Integer senderId) {
+		this.senderId = senderId;
+	}
 
-    public void setReceiverId(Integer receiverId) {
-        this.receiverId = receiverId;
-    }
+	public Integer getReceiverId() {
+		return receiverId;
+	}
 
-    public Byte getMessageType() {
-        return messageType;
-    }
+	public void setReceiverId(Integer receiverId) {
+		this.receiverId = receiverId;
+	}
 
-    public void setMessageType(Byte messageType) {
-        this.messageType = messageType;
-    }
+	public Byte getMessageType() {
+		return messageType;
+	}
 
-    public String getMessageJson() {
-        return messageJson;
-    }
+	public void setMessageType(Byte messageType) {
+		this.messageType = messageType;
+	}
 
-    public void setMessageJson(String messageJson) {
-        this.messageJson = messageJson == null ? null : messageJson.trim();
-    }
+	public String getMessageJson() {
+		return messageJson;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setMessageJson(String messageJson) {
+		this.messageJson = messageJson == null ? null : messageJson.trim();
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public Boolean getIsDel() {
-        return isDel;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public void setIsDel(Boolean isDel) {
-        this.isDel = isDel;
-    }
+	public Boolean getIsDel() {
+		return isDel;
+	}
+
+	public void setIsDel(Boolean isDel) {
+		this.isDel = isDel;
+	}
 }

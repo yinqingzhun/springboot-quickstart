@@ -1,8 +1,5 @@
 package com.yqz.springboot.quickstart.controller;
 
-import java.util.HashMap;
-
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +19,9 @@ public class ChatController {
 	@Autowired
 	ChatMessageService chatMessageService;
 
-	// @Valid
 	@GetMapping("/{id}")
 	public ChatMessage getById(@PathVariable("id") @Min(value = 1, message = "id必须为正整数") int id) {
 		return chatMessageService.getById(id);
 	}
 
-	
 }

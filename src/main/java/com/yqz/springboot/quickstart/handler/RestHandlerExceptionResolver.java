@@ -41,8 +41,10 @@ public class RestHandlerExceptionResolver extends AbstractHandlerMethodException
 
 				if (ex instanceof ConstraintViolationException)
 					map.put("message", "参数值不合法");
-				else
+				else {
 					map.put("message", ex.getClass().getSimpleName() + " occoured." + message);
+					map.put("detail", ex.toString());
+				}
 				response.setCharacterEncoding("utf-8");
 				response.getWriter().append(new ObjectMapper().writeValueAsString(map)).flush();
 			} catch (IOException e) {

@@ -24,9 +24,18 @@ public class HelloService {
 		return this.app.getDescription();
 	}
 
-	@Cacheable(value = "datetime")
 	public String getAppName() {
-		return appName + LocalDateTime.now();
+		return appName;
+	}
+
+	@Cacheable(value = "datetime1")
+	public String hello(String who) {
+		return String.format("\nhello %-10s! ", who) + LocalDateTime.now().toString();
+	}
+
+	@Cacheable(value = "datetime2")
+	public String welcome(String who) {
+		return String.format("\nwelcome %-10s! ", who) + LocalDateTime.now().toString();
 	}
 
 }

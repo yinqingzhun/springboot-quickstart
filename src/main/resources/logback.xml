@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
-<property name="DEV_HOME" value="c:/logs" />
+	<property name="DEV_HOME" value="c:/logs/quickstart/" />
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<!-- encoder 默认配置为PatternLayoutEncoder -->
 		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger	%msg%n</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger	 %msg%n</pattern>
 		</encoder>
 	</appender>
 
@@ -13,13 +13,12 @@
 		<file>${DEV_HOME}/debug.log</file>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<Pattern>
-				%d{yyyy-MM-dd HH:mm:ss} - %msg%n
-			</Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger - %msg%n			</Pattern>
 		</encoder>
 
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- rollover daily -->
-			<fileNamePattern>${DEV_HOME}/archived/debug.%d{yyyy-MM-dd}.%i.log
+			<fileNamePattern>${DEV_HOME}/%d{yyyy-MM-dd}.%i.log
 			</fileNamePattern>
 			<timeBasedFileNamingAndTriggeringPolicy
 				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
@@ -28,8 +27,8 @@
 		</rollingPolicy>
 
 	</appender>
-
-	<root level="debug">
+	<logger name="org.springframework.jndi" level="error"></logger>
+	<root level="info">
 		<appender-ref ref="STDOUT" />
 	</root>
 </configuration>  
