@@ -1,117 +1,151 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yqz.springboot.quickstart.mapper.ChatMessageMapper">
-  <resultMap id="BaseResultMap" type="com.yqz.springboot.quickstart.model.po.ChatMessage">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="sender_id" jdbcType="INTEGER" property="senderId" />
-    <result column="receiver_id" jdbcType="INTEGER" property="receiverId" />
-    <result column="message_type" jdbcType="TINYINT" property="messageType" />
-    <result column="message_json" jdbcType="VARCHAR" property="messageJson" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="is_del" jdbcType="BIT" property="isDel" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, sender_id, receiver_id, message_type, message_json, create_time, is_del
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from chatmessage
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from chatmessage
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.yqz.springboot.quickstart.model.po.ChatMessage">
-    insert into chatmessage (id, sender_id, receiver_id, 
-      message_type, message_json, create_time, 
-      is_del)
-    values (#{id,jdbcType=INTEGER}, #{senderId,jdbcType=INTEGER}, #{receiverId,jdbcType=INTEGER}, 
-      #{messageType,jdbcType=TINYINT}, #{messageJson,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{isDel,jdbcType=BIT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.yqz.springboot.quickstart.model.po.ChatMessage">
-    insert into chatmessage
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="senderId != null">
-        sender_id,
-      </if>
-      <if test="receiverId != null">
-        receiver_id,
-      </if>
-      <if test="messageType != null">
-        message_type,
-      </if>
-      <if test="messageJson != null">
-        message_json,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="isDel != null">
-        is_del,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="senderId != null">
-        #{senderId,jdbcType=INTEGER},
-      </if>
-      <if test="receiverId != null">
-        #{receiverId,jdbcType=INTEGER},
-      </if>
-      <if test="messageType != null">
-        #{messageType,jdbcType=TINYINT},
-      </if>
-      <if test="messageJson != null">
-        #{messageJson,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDel != null">
-        #{isDel,jdbcType=BIT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yqz.springboot.quickstart.model.po.ChatMessage">
-    update chatmessage
-    <set>
-      <if test="senderId != null">
-        sender_id = #{senderId,jdbcType=INTEGER},
-      </if>
-      <if test="receiverId != null">
-        receiver_id = #{receiverId,jdbcType=INTEGER},
-      </if>
-      <if test="messageType != null">
-        message_type = #{messageType,jdbcType=TINYINT},
-      </if>
-      <if test="messageJson != null">
-        message_json = #{messageJson,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDel != null">
-        is_del = #{isDel,jdbcType=BIT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.yqz.springboot.quickstart.model.po.ChatMessage">
-    update chatmessage
-    set sender_id = #{senderId,jdbcType=INTEGER},
-      receiver_id = #{receiverId,jdbcType=INTEGER},
-      message_type = #{messageType,jdbcType=TINYINT},
-      message_json = #{messageJson,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      is_del = #{isDel,jdbcType=BIT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+	<resultMap id="BaseResultMap"
+		type="com.yqz.springboot.quickstart.model.po.ChatMessage">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="sender_id" jdbcType="INTEGER" property="senderId" />
+		<result column="receiver_id" jdbcType="INTEGER" property="receiverId" />
+		<result column="message_type" jdbcType="TINYINT" property="messageType" />
+		<result column="message_json" jdbcType="VARCHAR" property="messageJson" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="is_del" jdbcType="BIT" property="isDel" />
+	</resultMap>
+	<resultMap type="com.yqz.springboot.quickstart.model.KeyValuePair"
+		id="keyValuePair">
+		<result column="key" jdbcType="INTEGER" property="key" />
+		<result column="value" jdbcType="INTEGER" property="value" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, sender_id, receiver_id, message_type, message_json,
+		create_time,
+		is_del
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from chatmessage
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from chatmessage
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		chatmessage
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.yqz.springboot.quickstart.model.po.ChatMessage">
+		insert into chatmessage (id,
+		sender_id, receiver_id,
+		message_type, message_json, create_time,
+		is_del)
+		values (#{id,jdbcType=INTEGER}, #{senderId,jdbcType=INTEGER},
+		#{receiverId,jdbcType=INTEGER},
+		#{messageType,jdbcType=TINYINT},
+		#{messageJson,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+		#{isDel,jdbcType=BIT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.yqz.springboot.quickstart.model.po.ChatMessage">
+		insert into chatmessage
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="senderId != null">
+				sender_id,
+			</if>
+			<if test="receiverId != null">
+				receiver_id,
+			</if>
+			<if test="messageType != null">
+				message_type,
+			</if>
+			<if test="messageJson != null">
+				message_json,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="isDel != null">
+				is_del,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="senderId != null">
+				#{senderId,jdbcType=INTEGER},
+			</if>
+			<if test="receiverId != null">
+				#{receiverId,jdbcType=INTEGER},
+			</if>
+			<if test="messageType != null">
+				#{messageType,jdbcType=TINYINT},
+			</if>
+			<if test="messageJson != null">
+				#{messageJson,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isDel != null">
+				#{isDel,jdbcType=BIT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.yqz.springboot.quickstart.model.po.ChatMessage">
+		update chatmessage
+		<set>
+			<if test="senderId != null">
+				sender_id = #{senderId,jdbcType=INTEGER},
+			</if>
+			<if test="receiverId != null">
+				receiver_id = #{receiverId,jdbcType=INTEGER},
+			</if>
+			<if test="messageType != null">
+				message_type = #{messageType,jdbcType=TINYINT},
+			</if>
+			<if test="messageJson != null">
+				message_json = #{messageJson,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isDel != null">
+				is_del = #{isDel,jdbcType=BIT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.yqz.springboot.quickstart.model.po.ChatMessage">
+		update chatmessage
+		set sender_id = #{senderId,jdbcType=INTEGER},
+		receiver_id =
+		#{receiverId,jdbcType=INTEGER},
+		message_type =
+		#{messageType,jdbcType=TINYINT},
+		message_json =
+		#{messageJson,jdbcType=VARCHAR},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP},
+		is_del = #{isDel,jdbcType=BIT}
+		where
+		id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="getReceivedMessageCount" resultType="com.yqz.springboot.quickstart.model.KeyValuePair">
+		SELECT
+		receiver_id as `key`,count(1) as `value` FROM chatmessage group by
+		receiver_id
+	</select>
+	<select id="getAllIdList" resultType="java.lang.Integer">
+		select id from chatmessage limit 10
+	</select>
+
 </mapper>

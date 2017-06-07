@@ -17,14 +17,17 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yqz.springboot.quickstart.exception.UserNotFoundException;
 import com.yqz.springboot.quickstart.model.MyMessage;
 import com.yqz.springboot.quickstart.service.HelloService;
@@ -69,7 +72,6 @@ public class HelloController extends BaseController {
 		return LocalDateTime.now().toString();
 	}
 
-	@ExceptionHandler(value = IllegalArgumentException.class)
 	@RequestMapping(value = "/sayHello", method = RequestMethod.GET)
 	public @Valid MyMessage sayHello(@RequestParam("message") String msg, Model model) {
 
@@ -81,7 +83,24 @@ public class HelloController extends BaseController {
 	}
 
 	@RequestMapping(value = "/showMessage", method = RequestMethod.GET)
-	public @Valid MyMessage showMessage(@Valid MyMessage msg) {
+	public MyMessage showMessage(MyMessage msg, BindingResult br) {
+		if (br.hasErrors())
+			return new MyMessage() {
+				@Override
+				public String getMessage() {
+					try {
+						return new ObjectMapper().writeValueAsString(br.getAllErrors());
+					} catch (JsonProcessingException e) {
+						e.printStackTrace();
+						return "";
+					}
+				}
+			};
+		return msg;
+	}
+
+	@RequestMapping(value = "/addMessage", method = RequestMethod.POST)
+	public MyMessage addMessage(@RequestBody MyMessage msg) {
 		return msg;
 	}
 
@@ -89,6 +108,18 @@ public class HelloController extends BaseController {
 	public String date(@DateTimeFormat(iso = ISO.DATE) @PathVariable Date date) {
 		DateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return "input date is " + DateFormat.getDateInstance().format(date);
+	}
+
+	@RequestMapping(value = "ex", method = RequestMethod.GET)
+	public MyMessage ex() {
+		try {
+			int i = 1 / 0;
+		} catch (Exception e) {
+			logger.error("计算失败", e);
+			return new MyMessage("exception occur." + e.toString());
+		}
+		return new MyMessage("everything is ok.");
+
 	}
 
 	/*

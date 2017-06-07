@@ -1,6 +1,7 @@
 package com.yqz.springboot.quickstart.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +20,11 @@ public class HomeController {
 		return new MyMessage("welcome,buddy!");
 	}
 
-	@RequestMapping(value = "")
-	public String home(@ModelAttribute("myMessage") MyMessage message) {
+	@RequestMapping
+	public String home(@ModelAttribute("myMessage") MyMessage message, Model model) {
 		message.setMessage("hi,buddy!");
-		return "home";
+		model.addAttribute("hello", "this is home method in HomeController.");
+		return "h5";
 	}
 
 	@RequestMapping(value = "/index")

@@ -1,5 +1,6 @@
 package com.yqz.springboot.quickstart.config;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -18,10 +19,14 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.StringUtils;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.mvc.WebContentInterceptor;
+import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
+import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.ResourceBundleViewResolver;
@@ -34,6 +39,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
+import com.yqz.springboot.quickstart.handler.RestHandlerExceptionResolver;
 
 @Configuration
 @PropertySource("classpath:/config/app.properties")
@@ -66,15 +72,13 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		super.configurePathMatch(configurer);
 	}
 
-	// @Override
-	// protected void
-	// configureHandlerExceptionResolvers(List<HandlerExceptionResolver>
-	// exceptionResolvers) {
-	// exceptionResolvers.add(new ExceptionHandlerExceptionResolver());
-	// exceptionResolvers.add(new RestHandlerExceptionResolver());
-	// exceptionResolvers.add(new DefaultHandlerExceptionResolver());
-	// exceptionResolvers.add(new SimpleMappingExceptionResolver());
-	// }
+	@Override
+	protected void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
+		exceptionResolvers.add(new ExceptionHandlerExceptionResolver());
+		exceptionResolvers.add(new DefaultHandlerExceptionResolver());
+		exceptionResolvers.add(new SimpleMappingExceptionResolver());
+		exceptionResolvers.add(new RestHandlerExceptionResolver());
+	}
 
 	@Bean
 	public InternalResourceViewResolver internalResourceViewResolver() {
@@ -89,7 +93,10 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	@Bean
 	public ResourceBundleViewResolver resourceBundleViewResolver() {
 		ResourceBundleViewResolver resolver = new ResourceBundleViewResolver();
-		resolver.setBasename("views.views");
+		resolver.setBasename("views.bundle");// classpath location. note that
+												// the JDK's standard
+												// ResourceBundle treats dots as
+												// package separators
 		resolver.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		return resolver;
 	}
@@ -114,8 +121,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.disable(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES);
 		objectMapper.disable(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES);
-		// objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd
-		// HH:mm:ss"));
+		objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 		// objectMapper.configOverride(Date.class).setFormat(JsonFormat.Value.forPattern("yyyy-MM-dd"));
 
 		JavaTimeModule javaTimeModule = new JavaTimeModule();
@@ -152,5 +158,26 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		});
 
 	}
+
+	// @Bean
+	// public ITemplateResolver templateResolver() {
+	// SpringResourceTemplateResolver templateResolver = new
+	// SpringResourceTemplateResolver();
+	// templateResolver.setPrefix("/WEB-INF/templates/");
+	// templateResolver.setSuffix(".html");
+	// templateResolver.setTemplateMode("HTML5");
+	// templateResolver.setCharacterEncoding("utf-8");
+	// templateResolver.setCacheable(false);
+	// return templateResolver;
+	// }
+
+	// @Bean
+	// public ViewResolver springThymeleafViewResolver() {
+	// ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+	// viewResolver.setTemplateEngine(getApplicationContext().getBean(SpringTemplateEngine.class));
+	// viewResolver.setOrder(1);
+	// viewResolver.setCharacterEncoding("UTF-8");
+	// return viewResolver;
+	// }
 
 }

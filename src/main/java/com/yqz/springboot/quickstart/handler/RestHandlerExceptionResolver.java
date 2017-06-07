@@ -1,6 +1,5 @@
 package com.yqz.springboot.quickstart.handler;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -29,30 +29,34 @@ public class RestHandlerExceptionResolver extends AbstractHandlerMethodException
 		} else if (request.getHeader("accept").toLowerCase().contains("application/xml")) {
 
 		}
-
+		ModelAndView mv = new ModelAndView();
 		if (ex != null && (AnnotationUtils.findAnnotation(handlerMethod.getBeanType(), ResponseBody.class) != null
 				|| AnnotationUtils.findAnnotation(handlerMethod.getMethod(), ResponseBody.class) != null)) {
-			try {
-				String message = "";
-				if (StringUtils.hasText(ex.getMessage()))
-					message = ex.getMessage();
 
-				HashMap<String, String> map = new HashMap<>();
+			String message = "";
+			if (StringUtils.hasText(ex.getMessage()))
+				message = ex.getMessage();
 
-				if (ex instanceof ConstraintViolationException)
-					map.put("message", "参数值不合法");
-				else {
-					map.put("message", ex.getClass().getSimpleName() + " occoured." + message);
-					map.put("detail", ex.toString());
-				}
-				response.setCharacterEncoding("utf-8");
-				response.getWriter().append(new ObjectMapper().writeValueAsString(map)).flush();
-			} catch (IOException e) {
-				logger.error(e.toString());
+			HashMap<String, String> map = new HashMap<>();
+
+			if (ex instanceof ConstraintViolationException)
+				map.put("message", "参数值不合法");
+			else {
+				map.put("message", ex.getClass().getSimpleName() + " occoured." + message);
+				map.put("detail", ex.toString());
 			}
+			// response.setCharacterEncoding("utf-8");
+			// response.getWriter().append(new
+			// ObjectMapper().writeValueAsString(map)).flush();
+
+			ObjectMapper mapper = new ObjectMapper();
+			MappingJackson2JsonView jacksonView = new MappingJackson2JsonView(mapper);
+			jacksonView.setAttributesMap(map);
+			mv.setView(jacksonView);
+
 		}
 
-		return new ModelAndView();
+		return mv;
 
 	}
 

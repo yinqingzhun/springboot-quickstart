@@ -12,7 +12,6 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.hateoas.VndErrors;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,7 +20,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.yqz.springboot.quickstart.exception.UserNotFoundException;
 
-@ControllerAdvice
+// todo @ControllerAdvice
 public class MvcControllerAdvice {
 	Logger logger = LoggerFactory.getLogger(MvcControllerAdvice.class);
 
@@ -29,8 +28,15 @@ public class MvcControllerAdvice {
 	@ExceptionHandler(UserNotFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	VndErrors userNotFoundExceptionHandler(UserNotFoundException ex) {
-		logger.error("found UserNotFoundException");
-		return new VndErrors("error", ex.getMessage());
+		return new VndErrors("error", ex.toString());
+	}
+
+	@ResponseBody
+	@ExceptionHandler(Exception.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	VndErrors defaultExceptionHandler(Exception ex) {
+		logger.error(ex.toString());
+		return new VndErrors("error", ex.toString());
 	}
 
 	@InitBinder // 必须有一个参数WebDataBinder

@@ -1,6 +1,5 @@
 package com.yqz.springboot.quickstart.model;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 
 import javax.validation.constraints.NotNull;
@@ -15,11 +14,11 @@ public class MyMessage {
 	}
 
 	public MyMessage(String msg) {
-		this(msg, LocalDateTime.now());
+		this(msg, "");
 
 	}
 
-	public MyMessage(String msg, LocalDateTime dt) {
+	public MyMessage(String msg, String dt) {
 		this.message = msg;
 		this.createTime = dt;
 		TypeFactory.defaultInstance().constructParametrizedType(Set.class, Set.class, Integer.class);
@@ -28,7 +27,7 @@ public class MyMessage {
 	@NotNull
 	@Length(min = 1, max = 10)
 	private String message;
-	private LocalDateTime createTime;
+	private String createTime;
 
 	public String getMessage() {
 		return message;
@@ -38,11 +37,11 @@ public class MyMessage {
 		this.message = message;
 	}
 
-	public LocalDateTime getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(LocalDateTime createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
 
