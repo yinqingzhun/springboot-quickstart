@@ -3,3 +3,4 @@ encoding//src/main/resources/application.properties=UTF-8
 encoding//src/main/resources/config/app.properties=UTF-8
 encoding//src/main/resources/templates/h5.html=UTF-8
 encoding//src/main/resources/templates/s.html=GB2312
+encoding//src/main/webapp/WEB-INF/jsp/home.jsp=UTF-8
