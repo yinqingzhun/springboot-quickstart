@@ -1,7 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" session="false"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,57 +5,112 @@
 <title>Home Page</title>
 <script type="text/javascript"
 	src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<style type="text/css">
+.treebox {
+	width: 200px;
+	background-color: #1a6cb9;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 100%;
+}
+
+.current {
+	background: #0f4679;
+}
+
+.menu {
+	overflow: hidden;
+	border-color: #ddd;
+	border-style: solid;
+	border-width: 0 1px 1px;
+	padding: 0;
+	margin: 0;
+	border: none;
+}
+
+ul, li {
+	list-style-type: none;
+}
+
+.page {
+	height: 100%;
+	width: auto;
+	position: absolute;
+	left: 200px;
+	right: 0;
+	bottom: 0;
+	_width: 100%;
+}
+
+iframe {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.box {
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+.menu li a {
+	border-bottom: 1px solid #000;
+	display: block;
+	height: 45px;
+	line-height: 45px;
+	color: #fff;
+	padding-left: 50px;
+	border-bottom: 1px solid #000;
+	font-size: 16px;
+	position: relative;
+	transition: all .5s ease 0s;
+	height: 45px;
+	line-height: 45px;
+	color: #fff;
+	padding-left: 50px;
+	border-bottom: 1px solid #000;
+	font-size: 16px;
+	position: relative;
+	text-decoration: none;
+}
+</style>
 </head>
 <body>
-	<h1>Welcome to Home Page</h1>
-	<c:if test="${myMessage!=null }">
-		<div>${myMessage.message}</div>
-		<div>${myMessage.createTime}</div>
-	</c:if>
-	<div id="msg"></div>
-	<ul>
-		<li>（1）<c:out value="普通一行字符串"></c:out></li>
-		<li>（2）<c:out value="&lt未使用字符转义&gt" /></li>
-		<li>（3）<c:out value="&lt未使用字符转义&gt" escapeXml="false"></c:out></li>
-		<li>（4）<c:out value="${null}">使用了默认值</c:out></li>
-		<li>（5）<c:out value="${null}"></c:out></li>
-	</ul>
-	<c:url value="http://www.autohome.com.cn">autohome</c:url>
-	<%!private int initVar = 0;
-	private int serviceVar = 0;
-	private int destroyVar = 0;%>
+	<div class="treebox">
+		<ul class="menu">
+			<li><a href="javascript:;"
+				data-url="http://agv.autohome.com.cn/youku">优酷（综合）</a></li>
+			<li><a href="javascript:;"
+				data-url="http://agv.autohome.com.cn/youku/su">优酷（自媒体）</a></li>
+			<li><a href="javascript:;"
+				data-url="http://agv.autohome.com.cn/so/q_宝马">爱奇艺</a></li>
+			<li><a href="javascript:;"
+				data-url="http://agv.autohome.com.cn/qq">腾讯</a></li>
+		</ul>
+	</div>
 
-	<%!public void jspInit() {
-		initVar++;
-		System.out.println("jspInit(): JSP被初始化了" + initVar + "次");
-	}
+	<div class="page">
+		<iframe id="frame" style="width: 100%; border: none; height: 100%;"
+			src="http://www.baidu.com"></iframe>
+	</div>
 
-	public void jspDestroy() {
-		destroyVar++;
-		System.out.println("jspDestroy(): JSP被销毁了" + destroyVar + "次");
-	}%>
-
-	<%
-		serviceVar++;
-		System.out.println("_jspService(): JSP共响应了" + serviceVar + "次请求");
-
-		String content1 = "初始化次数 : " + initVar;
-		String content2 = "响应客户请求次数 : " + serviceVar;
-		String content3 = "销毁次数 : " + destroyVar;
-	%>
 	<script type="text/javascript">
 		$(function() {
-			var ajax = $.ajax({
-				"url" : "/chat/1"
-
-			})
-
-			ajax.done(function(data) {
-				$("#msg").text(JSON.stringify(data));
+			$('li').mouseover(function() {
+				$(this).addClass('current');
+			}).mouseout(function() {
+				$(this).removeClass('current');
 			});
-			ajax.fail(function(data) {
-				$("#msg").text('request failed.');
+
+			$('.menu a').click(function() {
+				$('#frame').attr("src", $(this).data("url"));
+
 			});
+			
+			$('.menu a').get(0).click();
 
 		});
 	</script>
