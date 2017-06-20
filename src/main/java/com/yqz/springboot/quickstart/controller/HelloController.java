@@ -82,8 +82,8 @@ public class HelloController extends BaseController {
 		return new MyMessage("I say  " + msg);
 	}
 
-	@RequestMapping(value = "/showMessage", method = RequestMethod.GET)
-	public MyMessage showMessage(MyMessage msg, BindingResult br) {
+	@RequestMapping(value = "/showMessage", method = RequestMethod.POST)
+	public MyMessage showMessage(@RequestParam("info") String info, @RequestBody MyMessage msg, BindingResult br) {
 		if (br.hasErrors())
 			return new MyMessage() {
 				@Override
