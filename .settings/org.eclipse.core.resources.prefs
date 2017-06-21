@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/main/resources/application.properties=UTF-8
 encoding//src/main/resources/config/app.properties=UTF-8
+encoding//src/main/resources/profiles/dev.properties=UTF-8
+encoding//src/main/resources/profiles/prod.properties=UTF-8
 encoding//src/main/resources/templates/h5.html=UTF-8
 encoding//src/main/resources/templates/s.html=GB2312
-encoding/<project>=UTF-8

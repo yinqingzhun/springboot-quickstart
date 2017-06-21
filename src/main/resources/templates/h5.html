@@ -1,5 +1,11 @@
 <!DOCTYPE html   >
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
-<body>件</body>
+<body>
+<div>图画本</div>
+<div th:text="'Welcome to our application,'+ ${myMessage.message}+'!'"></div>
+<div th:text="|Welcome to our application, ${myMessage.message}!|"></div>
+<a th:href="@{/xxx/aa.do?(url=${url},message=${myMessage.message})}">link 1</a>
+<a th:href="@{'/xxx/aa.do?url='+${url}}">link 2</a>
+</body>
 </html>

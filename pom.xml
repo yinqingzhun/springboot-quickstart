@@ -4,7 +4,7 @@
 	<groupId>com.yqz.springboot</groupId>
 	<artifactId>springboot-quickstart</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<properties>
 		<java.version>1.8</java.version>
 		<spring.boot.version>1.5.1.RELEASE</spring.boot.version>
@@ -202,7 +202,7 @@
 						<goals>
 							<goal>repackage</goal>
 						</goals>
-						<phase>none</phase>
+						<!-- <phase>none</phase> -->
 					</execution>
 				</executions>
 				<!-- <dependencies> <dependency> <groupId>org.springframework</groupId> 

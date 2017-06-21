@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.yqz.springboot.quickstart.component.App;
 
-@PropertySource("classpath:config/app.properties")
+@PropertySource("classpath:/config/app.properties")
 @Service
 public class HelloService {
 

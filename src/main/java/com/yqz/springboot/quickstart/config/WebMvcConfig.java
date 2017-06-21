@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.Ordered;
 import org.springframework.core.convert.converter.Converter;
@@ -20,6 +21,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -30,6 +32,10 @@ import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolv
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.ResourceBundleViewResolver;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -159,25 +165,28 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
 	}
 
-	// @Bean
-	// public ITemplateResolver templateResolver() {
-	// SpringResourceTemplateResolver templateResolver = new
-	// SpringResourceTemplateResolver();
-	// templateResolver.setPrefix("/WEB-INF/templates/");
-	// templateResolver.setSuffix(".html");
-	// templateResolver.setTemplateMode("HTML5");
-	// templateResolver.setCharacterEncoding("utf-8");
-	// templateResolver.setCacheable(false);
-	// return templateResolver;
-	// }
+	 @Bean
+	 @Primary
+	 public ITemplateResolver templateResolver() {
+	 SpringResourceTemplateResolver templateResolver = new
+	 SpringResourceTemplateResolver();
+	 templateResolver.setPrefix("classpath:/templates/");
+	 templateResolver.setSuffix(".html");
+	 templateResolver.setTemplateMode("HTML5");
+	 templateResolver.setCharacterEncoding("utf-8");
+	 templateResolver.setCacheable(false);
+	 return templateResolver;
+	 }
 
-	// @Bean
-	// public ViewResolver springThymeleafViewResolver() {
-	// ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-	// viewResolver.setTemplateEngine(getApplicationContext().getBean(SpringTemplateEngine.class));
-	// viewResolver.setOrder(1);
-	// viewResolver.setCharacterEncoding("UTF-8");
-	// return viewResolver;
-	// }
+	 @Bean
+	 @Primary
+	 public ViewResolver springThymeleafViewResolver() {
+	 ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+	 viewResolver.setTemplateEngine(getApplicationContext().getBean(SpringTemplateEngine.class));
+	 viewResolver.setOrder(1);
+	 viewResolver.setCharacterEncoding("UTF-8");
+	 return viewResolver;
+	 }
+	 
 
 }

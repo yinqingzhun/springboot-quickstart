@@ -12,6 +12,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
 
 import com.yqz.springboot.quickstart.interceptor.CaseInsensitiveRequestParameterNameFilter;
@@ -52,6 +53,14 @@ public class Main extends SpringBootServletInitializer {
 	@Bean
 	public ShallowEtagHeaderFilter shallowEtagHeaderFilter() {
 		ShallowEtagHeaderFilter filter = new ShallowEtagHeaderFilter();
+		return filter;
+	}
+	
+	@Bean
+	public CharacterEncodingFilter characterEncodingFilter(){
+		CharacterEncodingFilter filter=new CharacterEncodingFilter();
+		filter.setEncoding("UTF-8");
+		//filter.setForceEncoding(true);
 		return filter;
 	}
 
