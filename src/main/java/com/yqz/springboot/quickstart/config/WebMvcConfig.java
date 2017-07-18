@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.mvc.WebContentInterceptor;
@@ -195,6 +196,14 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	 viewResolver.setCharacterEncoding("UTF-8");
 	 return viewResolver;
 	 }*/
+	
+	 @Override
+	    public void addViewControllers(ViewControllerRegistry registry) {
+	        registry.addViewController("/home").setViewName("home");
+	        registry.addViewController("/").setViewName("home");
+	        registry.addViewController("/hello").setViewName("hello");
+	        registry.addViewController("/login").setViewName("login");
+	    }
 	 
 
 }
