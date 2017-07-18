@@ -11,11 +11,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.yqz.springboot.quickstart.Main;
+import com.yqz.springboot.quickstart.Application;
 import com.yqz.springboot.quickstart.model.Person;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = Main.class)
+@SpringBootTest(classes = Application.class)
 public class RedisTest {
 
 	@Autowired
@@ -31,13 +31,13 @@ public class RedisTest {
 	@Test
 	public void set() throws Exception {
 
-		// 保存字符串
+		// 淇濆瓨瀛楃涓�
 		stringRedisTemplate.opsForValue().set("aaa", "111");
 		Assert.assertEquals("111", stringRedisTemplate.opsForValue().get("aaa"));
 
 		BoundHashOperations<String, String, Integer> ho = redisTemplate.boundHashOps("weather");
-		ho.put("北京", 1);
-		ho.put("上海", 2);
+		ho.put("鍖椾含", 1);
+		ho.put("涓婃捣", 2);
 		Assert.assertTrue(redisTemplate.boundHashOps("weather").size() == 2);
 	}
 

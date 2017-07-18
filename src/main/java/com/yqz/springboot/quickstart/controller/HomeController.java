@@ -15,7 +15,7 @@ import com.yqz.springboot.quickstart.model.MyMessage;
 
 @SuppressWarnings("unused")
 @Controller
-@RequestMapping(value = "/home")
+@RequestMapping(value = "/h")
 public class HomeController {
 	
 	

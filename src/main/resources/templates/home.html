@@ -1,25 +1,11 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-<title>Hello World!</title>
-</head>
-<body>
-	<h1 th:inline="text">Hello.v.2</h1>
-	<!-- <p th:text="|well,${hello}|">hello</p>
-	<p th:text="'well,'+${hello}|">hello</p> -->
-<p th:text="'文件夹'">hello</p>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Spring Security Example</title>
+    </head>
+    <body>
+        <h1>Welcome!</h1>
 
-	<div>
-		<a th:href="@{http://blog.csdn.net/u012706811}">绝对路径</a>
-	</div>
-	<div>
-		<a th:href="@{/}">相对路径</a>
-	</div>
-	<div>
-		<a th:href="@{css/bootstrap.min.css}">Content路径,默认访问static下的css文件</a>
-	</div>
-
-</body>
+        <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+    </body>
 </html>

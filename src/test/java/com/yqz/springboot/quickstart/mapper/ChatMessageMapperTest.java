@@ -9,11 +9,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
-import com.yqz.springboot.quickstart.Main;
+import com.yqz.springboot.quickstart.Application;
 import com.yqz.springboot.quickstart.model.po.ChatMessage;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = Main.class)
+@SpringBootTest(classes = Application.class)
 public class ChatMessageMapperTest {
 	@Autowired
 	ChatMessageMapper mapper;
