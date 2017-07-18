@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
-	<!-- <property name="LOG_PATH" value="c:/logs/quickstart/" /> -->
+	<property name="LOG_PATH" value="c:/logs/quickstart/" />
 	<conversionRule conversionWord="clr"
 		converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+		
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<!-- encoder 默认配置为PatternLayoutEncoder -->
 		<encoder>
-			<pattern>%clr(%5p) %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger %msg%n</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger %msg%n</pattern>
 		</encoder>
 	</appender>
+	
 	<appender name="minute"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_PATH}/minute.log</file>
@@ -31,7 +33,8 @@
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_PATH}/daily.log</file>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-			<Pattern> %d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger - %msg%n</Pattern>
+			<Pattern> %d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger - %msg%n
+			</Pattern>
 		</encoder>
 
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -44,6 +47,7 @@
 			</timeBasedFileNamingAndTriggeringPolicy>
 		</rollingPolicy>
 	</appender>
+	
 	<logger name="org.springframework.jndi" level="error"></logger>
 
 	<springProfile name="dev,test">

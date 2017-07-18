@@ -24,6 +24,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.mvc.WebContentInterceptor;
@@ -77,6 +78,13 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		configurer.setPathMatcher(pathMatcher);
 		super.configurePathMatch(configurer);
 	}
+	
+	@Override
+	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+		 registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
+		 registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/");
+		 registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/img/");
+	}
 
 	@Override
 	protected void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
@@ -86,7 +94,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		exceptionResolvers.add(new RestHandlerExceptionResolver());
 	}
 
-	@Bean
+	/*@Bean
 	public InternalResourceViewResolver internalResourceViewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/jsp/");
@@ -94,7 +102,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		resolver.setViewClass(JstlView.class);
 		resolver.setOrder(Ordered.LOWEST_PRECEDENCE);
 		return resolver;
-	}
+	}*/
 
 	@Bean
 	public ResourceBundleViewResolver resourceBundleViewResolver() {
@@ -109,12 +117,12 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
-		WebContentInterceptor webContentInterceptor = new WebContentInterceptor();
+		/*WebContentInterceptor webContentInterceptor = new WebContentInterceptor();
 		webContentInterceptor.setCacheControl(CacheControl.maxAge(30, TimeUnit.SECONDS));
 		webContentInterceptor.setRequireSession(false);
 		webContentInterceptor.setSupportedMethods(HttpMethod.GET.name(), HttpMethod.POST.name(), HttpMethod.PUT.name(),
 				HttpMethod.DELETE.name());
-		registry.addInterceptor(webContentInterceptor);
+		registry.addInterceptor(webContentInterceptor);*/
 
 		// OpenSessionInViewInterceptor openSessionInViewInterceptor = new
 		// OpenSessionInViewInterceptor();
@@ -165,7 +173,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
 	}
 
-	 @Bean
+	 /*@Bean
 	 @Primary
 	 public ITemplateResolver templateResolver() {
 	 SpringResourceTemplateResolver templateResolver = new
@@ -186,7 +194,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	 viewResolver.setOrder(1);
 	 viewResolver.setCharacterEncoding("UTF-8");
 	 return viewResolver;
-	 }
+	 }*/
 	 
 
 }

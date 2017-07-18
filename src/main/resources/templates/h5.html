@@ -1,11 +1,16 @@
 <!DOCTYPE html   >
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}"/>
+	
+	</head>
 <body>
-<div>图画本</div>
+<div class="well">图画本</div>
 <div th:text="'Welcome to our application,'+ ${myMessage.message}+'!'"></div>
 <div th:text="|Welcome to our application, ${myMessage.message}!|"></div>
 <a th:href="@{/xxx/aa.do?(url=${url},message=${myMessage.message})}">link 1</a>
 <a th:href="@{'/xxx/aa.do?url='+${url}}">link 2</a>
+<script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
 </body>
 </html>
