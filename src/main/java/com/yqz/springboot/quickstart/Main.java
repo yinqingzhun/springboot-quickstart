@@ -1,6 +1,8 @@
 package com.yqz.springboot.quickstart;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -9,6 +11,7 @@ import org.springframework.boot.Banner.Mode;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -55,24 +58,25 @@ public class Main extends SpringBootServletInitializer {
 		ShallowEtagHeaderFilter filter = new ShallowEtagHeaderFilter();
 		return filter;
 	}
-	
+
 	@Bean
-	public CharacterEncodingFilter characterEncodingFilter(){
-		CharacterEncodingFilter filter=new CharacterEncodingFilter();
+	public CharacterEncodingFilter characterEncodingFilter() {
+		CharacterEncodingFilter filter = new CharacterEncodingFilter();
 		filter.setEncoding("UTF-8");
-		//filter.setForceEncoding(true);
+		// filter.setForceEncoding(true);
 		return filter;
 	}
 
-	/*
-	 * @Bean public FilterRegistrationBean filterRegistrationBean() {
-	 * FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-	 * CaseInsensitiveRequestParameterNameFilter filter = new
-	 * CaseInsensitiveRequestParameterNameFilter();
-	 * registrationBean.setFilter(filter); List<String> urlPatterns = new
-	 * ArrayList<String>(); urlPatterns.add("/*");
-	 * registrationBean.setUrlPatterns(urlPatterns); return registrationBean; }
-	 */
+	@Bean
+	public FilterRegistrationBean filterRegistrationBean() {
+		FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+		CaseInsensitiveRequestParameterNameFilter filter = new CaseInsensitiveRequestParameterNameFilter();
+		registrationBean.setFilter(filter);
+		List<String> urlPatterns = new ArrayList<String>();
+		urlPatterns.add("/*");
+		registrationBean.setUrlPatterns(urlPatterns);
+		return registrationBean;
+	}
 
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
