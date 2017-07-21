@@ -1,4 +1,4 @@
-﻿(function ($, window, document, undefined) {
+(function ($, window, document, undefined) {
     var $window = $(window),
         id_alert = 'alert' + (new Date().getTime()),
         id_prompt = 'prompt' + (new Date().getTime()),
