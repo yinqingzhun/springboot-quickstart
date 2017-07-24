@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import com.yqz.springboot.quickstart.mapper.ChatMessageMapper;
 import com.yqz.springboot.quickstart.model.po.ChatMessage;
+
+//@Secured({ "ROLE_USER", "ROLE_ADMIN" })
 
 @Service
 public class ChatMessageService {
@@ -15,10 +18,12 @@ public class ChatMessageService {
 	@Autowired
 	ChatMessageMapper chatMessageMapper;
 
+	// @PostAuthorize ("returnObject.type == authentication.name")
 	public ChatMessage getById(int id) {
 		return chatMessageMapper.selectByPrimaryKey(id);
 	}
 
+	// @PreAuthorize("hasRole('ADMIN')") @PreAuthorize("hasRole('ADMIN') AND hasRole('DBA')")
 	public List<ChatMessage> getAll() {
 		return chatMessageMapper.selectAll();
 	}

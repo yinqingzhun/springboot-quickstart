@@ -1,11 +1,13 @@
 package com.yqz.springboot.quickstart.controller;
 
+import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.concurrent.Executors;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
@@ -30,6 +32,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yqz.springboot.quickstart.exception.UserNotFoundException;
 import com.yqz.springboot.quickstart.model.MyMessage;
+import com.yqz.springboot.quickstart.model.ReturnValue;
 import com.yqz.springboot.quickstart.service.HelloService;
 
 @Validated
@@ -108,6 +111,12 @@ public class HiController extends BaseController {
 	public String date(@DateTimeFormat(iso = ISO.DATE) @PathVariable Date date) {
 		DateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return "input date is " + DateFormat.getDateInstance().format(date);
+	}
+
+	@RequestMapping(value = "welcome")
+	public ReturnValue welcome(HttpServletRequest request) {
+		Principal p = request.getUserPrincipal();
+		return ReturnValue.buildSuccessResult(p);
 	}
 
 	@RequestMapping(value = "ex", method = RequestMethod.GET)
