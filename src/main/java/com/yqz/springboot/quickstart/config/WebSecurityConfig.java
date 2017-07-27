@@ -7,11 +7,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.yqz.springboot.quickstart.service.LoginUserService;
 
@@ -29,7 +32,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public AuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-		// authenticationProvider.setPasswordEncoder(new ShaPasswordEncoder());
+		
+//		ShaPasswordEncoder shaPasswordEncoder =new ShaPasswordEncoder();
+		BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+		
+		//shaPasswordEncoder.
+		// Hash a password for the first time
+//		String password=""; 
+//		String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
+
+		// gensalt's log_rounds parameter determines the complexity
+		// the work factor is 2**log_rounds, and the default is 10
+//		String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
+
+		// Check that an unencrypted password matches one that has
+		// previously been hashed
+//		if (BCrypt.checkpw(candidate, hashed))
+//			System.out.println("It matches");
+//		else
+//			System.out.println("It does not match");
+//		 authenticationProvider.setPasswordEncoder(new ShaPasswordEncoder());
 		authenticationProvider.setUserDetailsService(loginUserService);
 		return authenticationProvider;
 	}

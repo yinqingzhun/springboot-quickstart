@@ -3,19 +3,22 @@
 	<property name="LOG_PATH" value="c:/logs/quickstart/" />
 	<conversionRule conversionWord="clr"
 		converterClass="org.springframework.boot.logging.logback.ColorConverter" />
-		
+
+	<property name="log_patteren"
+		value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger %msg%n"></property>
+
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<!-- encoder 默认配置为PatternLayoutEncoder -->
 		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger %msg%n</pattern>
+			<pattern>${log_patteren}</pattern>
 		</encoder>
 	</appender>
-	
+
 	<appender name="minute"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_PATH}/minute.log</file>
 		<encoder>
-			<pattern>%d{HH:mm:ss.SSS} %-5level - %msg%n</pattern>
+			<pattern>${log_patteren}</pattern>
 		</encoder>
 		<rollingPolicy
 			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -33,21 +36,19 @@
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_PATH}/daily.log</file>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-			<Pattern> %d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger - %msg%n
-			</Pattern>
+			<Pattern>${log_patteren}</Pattern>
 		</encoder>
 
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- rollover daily -->
-			<fileNamePattern>${LOG_PATH}/archived/daily.%d{yyyy-MM-dd}.%i.log
-			</fileNamePattern>
+			<fileNamePattern>${LOG_PATH}/archived/daily.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
 			<timeBasedFileNamingAndTriggeringPolicy
 				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 				<maxFileSize>10MB</maxFileSize>
 			</timeBasedFileNamingAndTriggeringPolicy>
 		</rollingPolicy>
 	</appender>
-	
+
 	<logger name="org.springframework.jndi" level="error"></logger>
 
 	<springProfile name="dev,test">

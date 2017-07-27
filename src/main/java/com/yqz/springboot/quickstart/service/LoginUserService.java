@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -77,19 +78,8 @@ public class LoginUserService implements UserDetailsService {
 		// return USER;
 
 		// 因为UserEntity实现了UserDetails，所以也可以直接返回user
-		User user = new User(username, "p", true, true, true, true, Arrays.asList(new GrantedAuthority() {
-
-			/**
-			* 
-			*/
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public String getAuthority() {
-				return "user";
-			}
-
-		}));
+		User user = new User(username, "p", true, true, true, true,
+				Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
 
 		return user;
 	}
