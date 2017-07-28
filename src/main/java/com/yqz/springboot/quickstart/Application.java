@@ -70,7 +70,7 @@ public class Application extends SpringBootServletInitializer {
 	public CharacterEncodingFilter characterEncodingFilter() {
 		CharacterEncodingFilter filter = new CharacterEncodingFilter();
 		filter.setEncoding("UTF-8");
-		// filter.setForceEncoding(true);
+		filter.setForceEncoding(true);
 		return filter;
 	}
 

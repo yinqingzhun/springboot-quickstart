@@ -4,7 +4,7 @@
 	<groupId>com.yqz.springboot</groupId>
 	<artifactId>springboot-quickstart</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<properties>
 		<java.version>1.8</java.version>
 		<spring.boot.version>1.5.1.RELEASE</spring.boot.version>
@@ -40,6 +40,11 @@
 	</dependencyManagement>
 	<dependencies>
 		<dependency>
+			<groupId>com.aliyun.oss</groupId>
+			<artifactId>aliyun-sdk-oss</artifactId>
+			<version>2.0.6</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 			<version>${spring.boot.version}</version>
@@ -50,12 +55,9 @@
 			<artifactId>spring-boot-starter-logging</artifactId>
 			<version>${spring.boot.version}</version>
 		</dependency>
-		
-		<!-- <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-			<version>${spring.boot.version}</version>
-		</dependency> -->
+
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-security</artifactId> 
+			<version>${spring.boot.version}</version> </dependency> -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

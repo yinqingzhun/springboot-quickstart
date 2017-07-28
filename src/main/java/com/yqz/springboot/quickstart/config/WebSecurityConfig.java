@@ -82,6 +82,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// .addLogoutHandler(logoutHandler) // 6
 				// .deleteCookies(cookieNamesToClear) //7
 				.permitAll();
+		http.csrf().disable();
 		
 //		 http.authorizeRequests()
 //	        .antMatchers("/", "/home").access("hasRole('USER') or hasRole('ADMIN') or hasRole('DBA')")
