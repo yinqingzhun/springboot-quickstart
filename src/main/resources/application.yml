@@ -1,7 +1,7 @@
 spring:
   datasource:
     name: qs
-    url: jdbc:mysql://10.168.12.84:3306/pet?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2b8
+    url: jdbc:mysql://10.168.12.84:3306/pet?autoReconnect=true&failOverReadOnly=false&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2b8
     username: mysql
     password: mysql@571
     type: com.alibaba.druid.pool.DruidDataSource
