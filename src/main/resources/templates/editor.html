@@ -15,11 +15,19 @@ textarea {
 </style>
 <link rel="stylesheet" href="/js/themes/default/default.css" />
 <script charset="utf-8" src="/js/kindeditor-all.js"></script>
+<script charset="utf-8" src="/js/jquery-1.7.1.min.js"></script>
 <script>
 	var editor;
 	KindEditor.ready(function(K) {
 		editor = K.create('textarea[name="content"]', {
-			allowFileManager : true
+			uploadJson : '/hi/upload',
+			allowFileManager : false,
+			uploading : function(form, callback) {
+				$.post('/hi/welcome', function(data) {
+					if (callback)
+						callback();
+				});
+			}
 		});
 
 		K('input[name=getHtml]').click(function(e) {
@@ -56,7 +64,8 @@ textarea {
 	<h3>默认模式</h3>
 	<textarea name="content"
 		style="width: 800px; height: 400px; visibility: hidden;">KindEditor</textarea>
-	<form action="/hi/addMessage">
+	<form action="/hi/addMessage" method="post"
+		enctype="multipart/form-data">
 		<div>
 			<label>message:</label><input type="text" name="message" />
 		</div>
@@ -66,10 +75,10 @@ textarea {
 	</form>
 	<script type="text/javascript">
 		window.document.forms[0].onsubmit = function(ev) {
-		var idNode=	document.createElement("input");
-		idNode.setAttribute("type","hidden");  
-		idNode.value='abcdefg';
-		idNode.name = 'ticket'; 
+			var idNode = document.createElement("input");
+			idNode.setAttribute("type", "hidden");
+			idNode.value = 'abcdefg';
+			idNode.name = 'ticket';
 			this.appendChild(idNode);
 			if (this.message.value == '') {
 				this.message.focus();

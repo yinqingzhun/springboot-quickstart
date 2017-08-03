@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.concurrent.Executors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
@@ -22,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -105,6 +107,11 @@ public class HiController extends BaseController {
 	@RequestMapping(value = "/addMessage", method = RequestMethod.POST)
 	public MyMessage addMessage(@RequestBody MyMessage msg) {
 		return msg;
+	}
+	
+	@PostMapping("upload")
+	public void upload(HttpServletRequest request,HttpServletResponse response){
+		return;
 	}
 
 	@RequestMapping("date/{date}")

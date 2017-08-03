@@ -1,12 +1,12 @@
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2016 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @website http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-* @version 4.1.11 (2016-03-31)
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2016
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @website http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ * @version 4.1.11 (2016-03-31)
+ ******************************************************************************/
 (function (window, undefined) {
 	if (window.KindEditor) {
 		return;
@@ -6036,13 +6036,13 @@ _plugin('core', function(K) {
 })(window);
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.lang({
 	source : 'HTML代码',
 	preview : '预览',
@@ -6272,13 +6272,13 @@ KindEditor.lang({
 }, 'zh-CN');
 KindEditor.options.langType = 'zh-CN';
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('anchor', function(K) {
 	var self = this, name = 'anchor', lang = self.lang(name + '.');
 	self.plugin.anchor = {
@@ -6318,13 +6318,13 @@ KindEditor.plugin('anchor', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('autoheight', function(K) {
 	var self = this;
 	if (!self.autoHeightMode) {
@@ -6356,21 +6356,19 @@ KindEditor.plugin('autoheight', function(K) {
 	}
 });
 /*
-* 如何实现真正的自动高度？
-* 修改编辑器高度之后，再次获取body内容高度时，最小值只会是当前iframe的设置高度，这样就导致高度只增不减。
-* 所以每次获取body内容高度之前，先将iframe的高度重置为最小高度，这样就能获取body的实际高度。
-* 由此就实现了真正的自动高度
-* 测试：chrome、firefox、IE9、IE8
-* */
+ * 如何实现真正的自动高度？ 修改编辑器高度之后，再次获取body内容高度时，最小值只会是当前iframe的设置高度，这样就导致高度只增不减。
+ * 所以每次获取body内容高度之前，先将iframe的高度重置为最小高度，这样就能获取body的实际高度。 由此就实现了真正的自动高度
+ * 测试：chrome、firefox、IE9、IE8
+ */
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('baidumap', function(K) {
 	var self = this, name = 'baidumap', lang = self.lang(name + '.');
 	var mapWidth = K.undef(self.mapWidth, 558);
@@ -6452,13 +6450,13 @@ KindEditor.plugin('baidumap', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 
 KindEditor.plugin('map', function(K) {
 	var self = this, name = 'map', lang = self.lang(name + '.');
@@ -6583,13 +6581,13 @@ KindEditor.plugin('map', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('clearhtml', function(K) {
 	var self = this, name = 'clearhtml';
 	self.clickToolbar(name, function() {
@@ -6612,13 +6610,13 @@ KindEditor.plugin('clearhtml', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 
 KindEditor.plugin('code', function(K) {
 	var self = this, name = 'code';
@@ -6672,13 +6670,13 @@ KindEditor.plugin('code', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('emoticons', function(K) {
 	var self = this, name = 'emoticons',
 		path = (self.emoticonsPath || self.pluginsPath + 'emoticons/images/'),
@@ -6801,13 +6799,13 @@ KindEditor.plugin('emoticons', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('filemanager', function(K) {
 	var self = this, name = 'filemanager',
 		fileManagerJson = K.undef(self.fileManagerJson, self.basePath + 'php/file_manager_json.php'),
@@ -6983,13 +6981,13 @@ KindEditor.plugin('filemanager', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('flash', function(K) {
 	var self = this, name = 'flash', lang = self.lang(name + '.'),
 		allowFlashUpload = K.undef(self.allowFlashUpload, true),
@@ -7137,13 +7135,13 @@ KindEditor.plugin('flash', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('image', function(K) {
 	var self = this, name = 'image',
 		allowImageUpload = K.undef(self.allowImageUpload, true),
@@ -7233,10 +7231,17 @@ KindEditor.plugin('image', function(K) {
 							return;
 						}
 						dialog.showLoading(self.lang('uploadLoading'));
-						uploadbutton.submit();
-						localUrlBox.val('');
+						
+						self.uploading&&self.uploading(form,function(){
+							
+							uploadbutton.submit();
+							localUrlBox.val('');
+						});
+						
+						
 						return;
 					}
+					else{
 					var url = K.trim(urlBox.val()),
 						width = widthBox.val(),
 						height = heightBox.val(),
@@ -7264,6 +7269,7 @@ KindEditor.plugin('image', function(K) {
 						return;
 					}
 					clickFn.call(self, url, title, width, height, 0, align);
+					}
 				}
 			},
 			beforeRemove : function() {
@@ -7281,7 +7287,10 @@ KindEditor.plugin('image', function(K) {
 			heightBox = K('.tab1 [name="height"]', div),
 			refreshBtn = K('.ke-refresh-btn', div),
 			titleBox = K('.tab1 [name="title"]', div),
-			alignBox = K('.tab1 [name="align"]', div);
+			alignBox = K('.tab1 [name="align"]', div),
+			form=K('form',div);
+		
+		
 		var tabs;
 		if (showRemote && showLocal) {
 			tabs = K.tabs({
@@ -7302,6 +7311,7 @@ KindEditor.plugin('image', function(K) {
 		} else if (showLocal) {
 			K('.tab2', div).show();
 		}
+		
 		var uploadbutton = K.uploadbutton({
 			button : K('.ke-upload-button', div)[0],
 			fieldName : filePostName,
@@ -7446,13 +7456,13 @@ KindEditor.plugin('image', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('insertfile', function(K) {
 	var self = this, name = 'insertfile',
 		allowFileUpload = K.undef(self.allowFileUpload, true),
@@ -7580,13 +7590,13 @@ KindEditor.plugin('insertfile', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('lineheight', function(K) {
 	var self = this, name = 'lineheight', lang = self.lang(name + '.');
 	self.clickToolbar(name, function() {
@@ -7618,13 +7628,13 @@ KindEditor.plugin('lineheight', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('link', function(K) {
 	var self = this, name = 'link';
 	self.plugin.link = {
@@ -7682,13 +7692,13 @@ KindEditor.plugin('link', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('media', function(K) {
 	var self = this, name = 'media', lang = self.lang(name + '.'),
 		allowMediaUpload = K.undef(self.allowMediaUpload, true),
@@ -7844,13 +7854,13 @@ KindEditor.plugin('media', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 (function(K) {
 function KSWFUpload(options) {
 	this.init(options);
@@ -8118,7 +8128,7 @@ KindEditor.plugin('multiimage', function(K) {
 	});
 });
 /* ******************* */
-/* Constructor & Init  */
+/* Constructor & Init */
 /* ******************* */
 (function() {
 window.SWFUpload = function (settings) {
@@ -8141,7 +8151,7 @@ SWFUpload.prototype.initSWFUpload = function (settings) {
 	}
 };
 /* *************** */
-/* Static Members  */
+/* Static Members */
 /* *************** */
 SWFUpload.instances = {};
 SWFUpload.movieCount = 0;
@@ -8196,10 +8206,10 @@ SWFUpload.completeURL = function(url) {
 	} else {
 		path = window.location.pathname.substr(0, indexSlash) + "/";
 	}
-	return /*currentURL +*/ path + url;
+	return /* currentURL + */ path + url;
 };
 /* ******************** */
-/* Instance Members  */
+/* Instance Members */
 /* ******************** */
 SWFUpload.prototype.initSettings = function () {
 	this.ensureDefault = function (settingName, defaultValue) {
@@ -8416,9 +8426,10 @@ SWFUpload.prototype.displayDebugInfo = function () {
 		].join("")
 	);
 };
-/* Note: addSetting and getSetting are no longer used by SWFUpload but are included
-	the maintain v2 API compatibility
-*/
+/*
+ * Note: addSetting and getSetting are no longer used by SWFUpload but are
+ * included the maintain v2 API compatibility
+ */
 SWFUpload.prototype.addSetting = function (name, value, default_value) {
     if (value == undefined) {
         return (this.settings[name] = default_value);
@@ -8447,11 +8458,9 @@ SWFUpload.prototype.callFlash = function (functionName, argumentArray) {
 	}
 	return returnValue;
 };
-/* *****************************
-	-- Flash control methods --
-	Your UI should use these
-	to operate SWFUpload
-   ***************************** */
+/*******************************************************************************
+ * -- Flash control methods -- Your UI should use these to operate SWFUpload
+ ******************************************************************************/
 SWFUpload.prototype.selectFile = function () {
 	this.callFlash("SelectFile");
 };
@@ -8470,13 +8479,12 @@ SWFUpload.prototype.cancelUpload = function (fileID, triggerErrorEvent) {
 SWFUpload.prototype.stopUpload = function () {
 	this.callFlash("StopUpload");
 };
-/* ************************
- * Settings methods
- *   These methods change the SWFUpload settings.
- *   SWFUpload settings should not be changed directly on the settings object
- *   since many of the settings need to be passed to Flash in order to take
- *   effect.
- * *********************** */
+/*******************************************************************************
+ * Settings methods These methods change the SWFUpload settings. SWFUpload
+ * settings should not be changed directly on the settings object since many of
+ * the settings need to be passed to Flash in order to take effect.
+ * ***********************
+ */
 SWFUpload.prototype.getStats = function () {
 	return this.callFlash("GetStats");
 };
@@ -8598,16 +8606,13 @@ SWFUpload.prototype.setButtonCursor = function (cursor) {
 	this.settings.button_cursor = cursor;
 	this.callFlash("SetButtonCursor", [cursor]);
 };
-/* *******************************
-	Flash Event Interfaces
-	These functions are used by Flash to trigger the various
-	events.
-	All these functions a Private.
-	Because the ExternalInterface library is buggy the event calls
-	are added to a queue and the queue then executed by a setTimeout.
-	This ensures that events are executed in a determinate order and that
-	the ExternalInterface bugs are avoided.
-******************************* */
+/*******************************************************************************
+ * Flash Event Interfaces These functions are used by Flash to trigger the
+ * various events. All these functions a Private. Because the ExternalInterface
+ * library is buggy the event calls are added to a queue and the queue then
+ * executed by a setTimeout. This ensures that events are executed in a
+ * determinate order and that the ExternalInterface bugs are avoided.
+ ******************************************************************************/
 SWFUpload.prototype.queueEvent = function (handlerName, argumentArray) {
 	if (argumentArray == undefined) {
 		argumentArray = [];
@@ -8705,8 +8710,11 @@ SWFUpload.prototype.fileQueueError = function (file, errorCode, message) {
 	file = this.unescapeFilePostParams(file);
 	this.queueEvent("file_queue_error_handler", [file, errorCode, message]);
 };
-/* Called after the file dialog has closed and the selected files have been queued.
-	You could call startUpload here if you want the queued files to begin uploading immediately. */
+/*
+ * Called after the file dialog has closed and the selected files have been
+ * queued. You could call startUpload here if you want the queued files to begin
+ * uploading immediately.
+ */
 SWFUpload.prototype.fileDialogComplete = function (numFilesSelected, numFilesQueued, numFilesInQueue) {
 	this.queueEvent("file_dialog_complete_handler", [numFilesSelected, numFilesQueued, numFilesInQueue]);
 };
@@ -8744,21 +8752,22 @@ SWFUpload.prototype.uploadComplete = function (file) {
 	file = this.unescapeFilePostParams(file);
 	this.queueEvent("upload_complete_handler", file);
 };
-/* Called by SWFUpload JavaScript and Flash functions when debug is enabled. By default it writes messages to the
-   internal debug console.  You can override this event and have messages written where you want. */
+/*
+ * Called by SWFUpload JavaScript and Flash functions when debug is enabled. By
+ * default it writes messages to the internal debug console. You can override
+ * this event and have messages written where you want.
+ */
 SWFUpload.prototype.debug = function (message) {
 	this.queueEvent("debug_handler", message);
 };
-/* **********************************
-	Debug Console
-	The debug console is a self contained, in page location
-	for debug message to be sent.  The Debug Console adds
-	itself to the body if necessary.
-	The console is automatically scrolled as messages appear.
-	If you are using your own debug handler or when you deploy to production and
-	have debug disabled you can remove these functions to reduce the file size
-	and complexity.
-********************************** */
+/*******************************************************************************
+ * Debug Console The debug console is a self contained, in page location for
+ * debug message to be sent. The Debug Console adds itself to the body if
+ * necessary. The console is automatically scrolled as messages appear. If you
+ * are using your own debug handler or when you deploy to production and have
+ * debug disabled you can remove these functions to reduce the file size and
+ * complexity.
+ ******************************************************************************/
 SWFUpload.prototype.debugMessage = function (message) {
 	if (this.settings.debug) {
 		var exceptionMessage, exceptionValues = [];
@@ -8805,15 +8814,13 @@ SWFUpload.Console.writeLine = function (message) {
 })();
 (function() {
 /*
-	Queue Plug-in
-	Features:
-		*Adds a cancelQueue() method for cancelling the entire queue.
-		*All queued files are uploaded when startUpload() is called.
-		*If false is returned from uploadComplete then the queue upload is stopped.
-		 If false is not returned (strict comparison) then the queue upload is continued.
-		*Adds a QueueComplete event that is fired when all the queued files have finished uploading.
-		 Set the event handler with the queue_complete_handler setting.
-	*/
+ * Queue Plug-in Features: Adds a cancelQueue() method for cancelling the entire
+ * queue. All queued files are uploaded when startUpload() is called. If false
+ * is returned from uploadComplete then the queue upload is stopped. If false is
+ * not returned (strict comparison) then the queue upload is continued. Adds a
+ * QueueComplete event that is fired when all the queued files have finished
+ * uploading. Set the event handler with the queue_complete_handler setting.
+ */
 if (typeof(SWFUpload) === "function") {
 	SWFUpload.queue = {};
 	SWFUpload.prototype.initSettings = (function (oldInitSettings) {
@@ -8883,13 +8890,13 @@ if (typeof(SWFUpload) === "function") {
 })();
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('pagebreak', function(K) {
 	var self = this;
 	var name = 'pagebreak';
@@ -8909,13 +8916,13 @@ KindEditor.plugin('pagebreak', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('plainpaste', function(K) {
 	var self = this, name = 'plainpaste';
 	self.clickToolbar(name, function() {
@@ -8950,13 +8957,13 @@ KindEditor.plugin('plainpaste', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('preview', function(K) {
 	var self = this, name = 'preview', undefined;
 	self.clickToolbar(name, function() {
@@ -8981,13 +8988,13 @@ KindEditor.plugin('preview', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('quickformat', function(K) {
 	var self = this, name = 'quickformat',
 		blockMap = K.toMap('blockquote,center,div,h1,h2,h3,h4,h5,h6,p');
@@ -9037,13 +9044,13 @@ KindEditor.plugin('quickformat', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('table', function(K) {
 	var self = this, name = 'table', lang = self.lang(name + '.'), zeroborder = 'ke-zeroborder';
 	function _setColor(box, color) {
@@ -9712,13 +9719,13 @@ KindEditor.plugin('table', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('template', function(K) {
 	var self = this, name = 'template', lang = self.lang(name + '.'),
 		htmlPath = self.pluginsPath + name + '/html/';
@@ -9768,13 +9775,13 @@ KindEditor.plugin('template', function(K) {
 });
 
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 KindEditor.plugin('wordpaste', function(K) {
 	var self = this, name = 'wordpaste';
 	self.clickToolbar(name, function() {
