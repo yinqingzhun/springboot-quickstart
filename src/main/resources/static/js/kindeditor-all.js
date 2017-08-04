@@ -7232,7 +7232,7 @@ KindEditor.plugin('image', function(K) {
 						}
 						dialog.showLoading(self.lang('uploadLoading'));
 						
-						self.uploading&&self.uploading(form,function(){
+						self.imageUploading&&self.imageUploading(form,function(){
 							
 							uploadbutton.submit();
 							localUrlBox.val('');
@@ -7320,6 +7320,8 @@ KindEditor.plugin('image', function(K) {
 			width: 60,
 			afterUpload : function(data) {
 				dialog.hideLoading();
+				if(imageUploaded)
+					data=imageUploaded();
 				if (data.error === 0) {
 					var url = data.url;
 					if (formatUploadUrl) {

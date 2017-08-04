@@ -17,16 +17,60 @@ textarea {
 <script charset="utf-8" src="/js/kindeditor-all.js"></script>
 <script charset="utf-8" src="/js/jquery-1.7.1.min.js"></script>
 <script>
+	function random_string(len) {
+		len = len || 32;
+		var chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
+		var maxPos = chars.length;
+		var pwd = '';
+		for (i = 0; i < len; i++) {
+			pwd += chars.charAt(Math.floor(Math.random() * maxPos));
+		}
+		return pwd;
+	}
+
+	function get_suffix(filename) {
+		pos = filename.lastIndexOf('.')
+		suffix = ''
+		if (pos != -1) {
+			suffix = filename.substring(pos)
+		}
+		return suffix;
+	}
+
 	var editor;
 	KindEditor.ready(function(K) {
 		editor = K.create('textarea[name="content"]', {
 			uploadJson : '/hi/upload',
 			allowFileManager : false,
-			uploading : function(form, callback) {
-				$.post('/hi/welcome', function(data) {
+			imageUploading : function(form, callback) {
+				$.post('/ali/tk', function(data) {
+
+					suffix = get_suffix($(form).find(':file').val());
+					g_object_name = data.dir + random_string(10) + suffix;
+					var json = {
+						'key' : g_object_name,
+						'policy' : data.policy,
+						'OSSAccessKeyId' : data.accessid,
+						'success_action_status' : '200',
+						'callback' : data.callback,
+						'signature' : data.signature
+					};
+
+					for (key in json) {
+
+						var node = document.createElement("input");
+						node.setAttribute("type", "hidden");
+						node.value = json[key];
+						node.name = key;
+						this.appendChild(node);
+					}
+
 					if (callback)
 						callback();
 				});
+			},
+			imageUploaded : function(data) {
+				return data;
 			}
 		});
 
