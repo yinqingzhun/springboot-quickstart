@@ -5,39 +5,29 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.Ordered;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.http.CacheControl;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
-import org.springframework.web.servlet.mvc.WebContentInterceptor;
 import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
 import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.ResourceBundleViewResolver;
-import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
-import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,6 +37,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
+import com.yqz.springboot.quickstart.controller.AppErrorController;
 import com.yqz.springboot.quickstart.handler.RestHandlerExceptionResolver;
 
 @Configuration
@@ -62,6 +53,14 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	 * mapping.setInterceptors(getApplicationContext().getBean(
 	 * ValidationInterceptor.class)); return mapping; }
 	 */
+
+	@Autowired
+	private ErrorAttributes errorAttributes;
+
+	@Bean
+	public AppErrorController appErrorController() {
+		return new AppErrorController(errorAttributes);
+	}
 
 	@Override
 	protected PathMatchConfigurer getPathMatchConfigurer() {
@@ -79,12 +78,12 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		configurer.setPathMatcher(pathMatcher);
 		super.configurePathMatch(configurer);
 	}
-	
+
 	@Override
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-		 registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
-		 registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/");
-		 registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/img/");
+		registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
+		registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/");
+		registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/img/");
 	}
 
 	@Override
@@ -95,15 +94,13 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		exceptionResolvers.add(new RestHandlerExceptionResolver());
 	}
 
-	/*@Bean
-	public InternalResourceViewResolver internalResourceViewResolver() {
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("/WEB-INF/jsp/");
-		resolver.setSuffix(".jsp");
-		resolver.setViewClass(JstlView.class);
-		resolver.setOrder(Ordered.LOWEST_PRECEDENCE);
-		return resolver;
-	}*/
+	/*
+	 * @Bean public InternalResourceViewResolver internalResourceViewResolver()
+	 * { InternalResourceViewResolver resolver = new
+	 * InternalResourceViewResolver(); resolver.setPrefix("/WEB-INF/jsp/");
+	 * resolver.setSuffix(".jsp"); resolver.setViewClass(JstlView.class);
+	 * resolver.setOrder(Ordered.LOWEST_PRECEDENCE); return resolver; }
+	 */
 
 	@Bean
 	public ResourceBundleViewResolver resourceBundleViewResolver() {
@@ -118,12 +115,16 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
-		/*WebContentInterceptor webContentInterceptor = new WebContentInterceptor();
-		webContentInterceptor.setCacheControl(CacheControl.maxAge(30, TimeUnit.SECONDS));
-		webContentInterceptor.setRequireSession(false);
-		webContentInterceptor.setSupportedMethods(HttpMethod.GET.name(), HttpMethod.POST.name(), HttpMethod.PUT.name(),
-				HttpMethod.DELETE.name());
-		registry.addInterceptor(webContentInterceptor);*/
+		/*
+		 * WebContentInterceptor webContentInterceptor = new
+		 * WebContentInterceptor();
+		 * webContentInterceptor.setCacheControl(CacheControl.maxAge(30,
+		 * TimeUnit.SECONDS)); webContentInterceptor.setRequireSession(false);
+		 * webContentInterceptor.setSupportedMethods(HttpMethod.GET.name(),
+		 * HttpMethod.POST.name(), HttpMethod.PUT.name(),
+		 * HttpMethod.DELETE.name());
+		 * registry.addInterceptor(webContentInterceptor);
+		 */
 
 		// OpenSessionInViewInterceptor openSessionInViewInterceptor = new
 		// OpenSessionInViewInterceptor();
@@ -174,38 +175,35 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
 	}
 
-	 /*@Bean
-	 @Primary
-	 public ITemplateResolver templateResolver() {
-	 SpringResourceTemplateResolver templateResolver = new
-	 SpringResourceTemplateResolver();
-	 templateResolver.setPrefix("classpath:/templates/");
-	 templateResolver.setSuffix(".html");
-	 templateResolver.setTemplateMode("HTML5");
-	 templateResolver.setCharacterEncoding("utf-8");
-	 templateResolver.setCacheable(false);
-	 return templateResolver;
-	 }
+	/*
+	 * @Bean
+	 * 
+	 * @Primary public ITemplateResolver templateResolver() {
+	 * SpringResourceTemplateResolver templateResolver = new
+	 * SpringResourceTemplateResolver();
+	 * templateResolver.setPrefix("classpath:/templates/");
+	 * templateResolver.setSuffix(".html");
+	 * templateResolver.setTemplateMode("HTML5");
+	 * templateResolver.setCharacterEncoding("utf-8");
+	 * templateResolver.setCacheable(false); return templateResolver; }
+	 * 
+	 * @Bean
+	 * 
+	 * @Primary public ViewResolver springThymeleafViewResolver() {
+	 * ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+	 * viewResolver.setTemplateEngine(getApplicationContext().getBean(
+	 * SpringTemplateEngine.class)); viewResolver.setOrder(1);
+	 * viewResolver.setCharacterEncoding("UTF-8"); return viewResolver; }
+	 */
 
-	 @Bean
-	 @Primary
-	 public ViewResolver springThymeleafViewResolver() {
-	 ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-	 viewResolver.setTemplateEngine(getApplicationContext().getBean(SpringTemplateEngine.class));
-	 viewResolver.setOrder(1);
-	 viewResolver.setCharacterEncoding("UTF-8");
-	 return viewResolver;
-	 }*/
-	
-	 @Override
-	    public void addViewControllers(ViewControllerRegistry registry) {
-	        registry.addViewController("/home").setViewName("home");
-	        registry.addViewController("/").setViewName("home");
-	        registry.addViewController("/hello").setViewName("hello");
-	        registry.addViewController("/login").setViewName("login");
-	        registry.addViewController("/upload").setViewName("upload");
-	        registry.addViewController("/editor").setViewName("editor");
-	    }
-	 
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/home").setViewName("home");
+		registry.addViewController("/").setViewName("home");
+		registry.addViewController("/hello").setViewName("hello");
+		registry.addViewController("/login").setViewName("login");
+		registry.addViewController("/upload").setViewName("upload");
+		registry.addViewController("/editor").setViewName("editor");
+	}
 
 }

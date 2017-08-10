@@ -1,10 +1,13 @@
 package com.yqz.springboot.quickstart.config;
 
 import java.beans.PropertyEditorSupport;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +15,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.hateoas.VndErrors;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,7 +24,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.yqz.springboot.quickstart.exception.UserNotFoundException;
 
-// todo @ControllerAdvice
+@ControllerAdvice
 public class MvcControllerAdvice {
 	Logger logger = LoggerFactory.getLogger(MvcControllerAdvice.class);
 
@@ -34,9 +38,13 @@ public class MvcControllerAdvice {
 	@ResponseBody
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	VndErrors defaultExceptionHandler(Exception ex) {
+	void defaultExceptionHandler(HttpServletResponse response,Exception ex) {
 		logger.error(ex.toString());
-		return new VndErrors("error", ex.toString());
+		 try {
+			response.sendError(HttpStatus.BAD_REQUEST.value());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@InitBinder // 必须有一个参数WebDataBinder
