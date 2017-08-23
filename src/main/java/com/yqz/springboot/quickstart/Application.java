@@ -25,6 +25,10 @@ import com.yqz.springboot.quickstart.interceptor.CaseInsensitiveRequestParameter
 @EnableScheduling
 public class Application extends SpringBootServletInitializer {
 
+	public Application() {
+		setRegisterErrorPageFilter(false);
+	}
+
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(Application.class);
@@ -44,7 +48,7 @@ public class Application extends SpringBootServletInitializer {
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		super.onStartup(servletContext);
-
+		setRegisterErrorPageFilter(false);
 		/*
 		 * FilterRegistration.Dynamic filter =
 		 * servletContext.addFilter(CaseInsensitiveRequestParameterNameFilter.
@@ -53,25 +57,6 @@ public class Application extends SpringBootServletInitializer {
 		 * filter.addMappingForUrlPatterns(null, true, "/*");
 		 */
 
-	}
-
-	@Bean
-	public CaseInsensitiveRequestParameterNameFilter caseInsensitiveRequestParameterNameFilter() {
-		return new CaseInsensitiveRequestParameterNameFilter();
-	}
-
-	@Bean
-	public ShallowEtagHeaderFilter shallowEtagHeaderFilter() {
-		ShallowEtagHeaderFilter filter = new ShallowEtagHeaderFilter();
-		return filter;
-	}
-
-	@Bean
-	public CharacterEncodingFilter characterEncodingFilter() {
-		CharacterEncodingFilter filter = new CharacterEncodingFilter();
-		filter.setEncoding("UTF-8");
-		filter.setForceEncoding(true);
-		return filter;
 	}
 
 	/*

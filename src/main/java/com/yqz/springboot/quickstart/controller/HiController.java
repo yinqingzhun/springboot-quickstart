@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.Max;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,10 +49,12 @@ public class HiController extends BaseController {
 	private String appDes;
 
 	@RequestMapping("get/{id}")
-	public String getById(@PathVariable @Min(1) int id,
+	public String getById(@PathVariable @Max(100000) int id,
 			@RequestParam(required = false, defaultValue = "0") int version) {
-		if (id < 10)
+		if (id <= 0)
 			throw new UserNotFoundException(id);
+		else if(id>10000)
+			throw new IllegalArgumentException("id could not be greater then 10000");
 		return "input id is " + id + ".version:" + version;
 	}
 

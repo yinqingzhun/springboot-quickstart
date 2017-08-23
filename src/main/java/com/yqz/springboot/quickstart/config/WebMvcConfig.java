@@ -18,6 +18,8 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.StringUtils;
+import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.ShallowEtagHeaderFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
@@ -25,6 +27,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
+import org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver;
 import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
 import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
 import org.springframework.web.servlet.view.ResourceBundleViewResolver;
@@ -39,6 +42,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.yqz.springboot.quickstart.controller.AppErrorController;
 import com.yqz.springboot.quickstart.handler.RestHandlerExceptionResolver;
+import com.yqz.springboot.quickstart.interceptor.CaseInsensitiveRequestParameterNameFilter;
 
 @Configuration
 @PropertySource("classpath:/config/app.properties")
@@ -89,9 +93,10 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	@Override
 	protected void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
 		exceptionResolvers.add(new ExceptionHandlerExceptionResolver());
+		exceptionResolvers.add(new ResponseStatusExceptionResolver());
 		exceptionResolvers.add(new DefaultHandlerExceptionResolver());
 		exceptionResolvers.add(new SimpleMappingExceptionResolver());
-		exceptionResolvers.add(new RestHandlerExceptionResolver());
+//		exceptionResolvers.add(new RestHandlerExceptionResolver());
 	}
 
 	/*
@@ -204,6 +209,24 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		registry.addViewController("/login").setViewName("login");
 		registry.addViewController("/upload").setViewName("upload");
 		registry.addViewController("/editor").setViewName("editor");
+		registry.addViewController("/error").setViewName("error");
+	}
+	@Bean
+	public CaseInsensitiveRequestParameterNameFilter caseInsensitiveRequestParameterNameFilter() {
+		return new CaseInsensitiveRequestParameterNameFilter();
 	}
 
+	@Bean
+	public ShallowEtagHeaderFilter shallowEtagHeaderFilter() {
+		ShallowEtagHeaderFilter filter = new ShallowEtagHeaderFilter();
+		return filter;
+	}
+
+	@Bean
+	public CharacterEncodingFilter characterEncodingFilter() {
+		CharacterEncodingFilter filter = new CharacterEncodingFilter();
+		filter.setEncoding("UTF-8");
+		filter.setForceEncoding(true);
+		return filter;
+	}
 }

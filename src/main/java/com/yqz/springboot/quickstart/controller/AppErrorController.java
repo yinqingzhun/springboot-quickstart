@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Basic Controller which is called for unhandled errors
  * see also  BasicErrorController
  */
-@Controller
+//@Controller
 public class AppErrorController implements ErrorController{
 
     /**

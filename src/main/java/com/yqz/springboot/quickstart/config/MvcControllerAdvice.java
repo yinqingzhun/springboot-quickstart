@@ -7,45 +7,62 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.hateoas.VndErrors;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.yqz.springboot.quickstart.exception.UserNotFoundException;
-
-@ControllerAdvice
+//@ControllerAdvice
 public class MvcControllerAdvice {
 	Logger logger = LoggerFactory.getLogger(MvcControllerAdvice.class);
 
-	@ResponseBody
-	@ExceptionHandler(UserNotFoundException.class)
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	VndErrors userNotFoundExceptionHandler(UserNotFoundException ex) {
-		return new VndErrors("error", ex.toString());
-	}
+	/*
+	 * @ResponseBody
+	 * 
+	 * @ExceptionHandler(UserNotFoundException.class) VndErrors
+	 * userNotFoundExceptionHandler(UserNotFoundException ex) { return new
+	 * VndErrors("error", ex.toString()); }
+	 */
+	
+	/*public static final String DEFAULT_ERROR_VIEW = "error";
 
-	@ResponseBody
-	@ExceptionHandler(Exception.class)
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	void defaultExceptionHandler(HttpServletResponse response,Exception ex) {
+    @ExceptionHandler(value = Exception.class)
+    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
+        // If the exception is annotated with @ResponseStatus rethrow it and let
+        // the framework handle it - like the OrderNotFoundException example
+        // at the start of this post.
+        // AnnotationUtils is a Spring Framework utility class.
+        if (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null) {
+            throw e;
+        }
+        // Otherwise setup and send the user to a default error-view.
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("exception", e);
+        mav.addObject("url", req.getRequestURL());
+        mav.setViewName(DEFAULT_ERROR_VIEW);
+        return mav;
+    }*/
+
+/*	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(IllegalArgumentException.class)
+	public void defaultExceptionHandler(HttpServletResponse response, Exception ex) {
 		logger.error(ex.toString());
-		 try {
-			response.sendError(HttpStatus.BAD_REQUEST.value());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+		
+		  try { response.sendError(HttpStatus.BAD_REQUEST.value()); } catch
+		  (IOException e) { e.printStackTrace(); }
+		 
+	}*/
 
 	@InitBinder // 必须有一个参数WebDataBinder
 	public void initializeBinder(WebDataBinder binder, WebRequest req) {

@@ -72,7 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/", "/home").permitAll().antMatchers("/admin/**").hasRole("ADMIN")
+		http.authorizeRequests().antMatchers("/", "/home","/hi/**").permitAll().antMatchers("/admin/**").hasRole("ADMIN")
 				.antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')").anyRequest().authenticated().and()
 				.formLogin().loginPage("/login").permitAll().and().logout()
 				// .logoutUrl("/my/logout")// 2
