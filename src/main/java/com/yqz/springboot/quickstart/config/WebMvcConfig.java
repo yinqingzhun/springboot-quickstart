@@ -209,7 +209,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		registry.addViewController("/login").setViewName("login");
 		registry.addViewController("/upload").setViewName("upload");
 		registry.addViewController("/editor").setViewName("editor");
-		registry.addViewController("/error").setViewName("error");
 	}
 	@Bean
 	public CaseInsensitiveRequestParameterNameFilter caseInsensitiveRequestParameterNameFilter() {

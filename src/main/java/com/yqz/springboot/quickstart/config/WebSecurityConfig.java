@@ -1,5 +1,10 @@
 package com.yqz.springboot.quickstart.config;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,18 +12,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
 import com.yqz.springboot.quickstart.service.LoginUserService;
 
-@EnableGlobalMethodSecurity(prePostEnabled=true,jsr250Enabled=true,securedEnabled=true)  
+@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true)
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -32,26 +37,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public AuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-		
-//		ShaPasswordEncoder shaPasswordEncoder =new ShaPasswordEncoder();
-		BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
-		
-		//shaPasswordEncoder.
+
+		// ShaPasswordEncoder shaPasswordEncoder =new ShaPasswordEncoder();
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+		// shaPasswordEncoder.
 		// Hash a password for the first time
-//		String password=""; 
-//		String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
+		// String password="";
+		// String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
 
 		// gensalt's log_rounds parameter determines the complexity
 		// the work factor is 2**log_rounds, and the default is 10
-//		String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
+		// String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
 		// Check that an unencrypted password matches one that has
 		// previously been hashed
-//		if (BCrypt.checkpw(candidate, hashed))
-//			System.out.println("It matches");
-//		else
-//			System.out.println("It does not match");
-//		 authenticationProvider.setPasswordEncoder(new ShaPasswordEncoder());
+		// if (BCrypt.checkpw(candidate, hashed))
+		// System.out.println("It matches");
+		// else
+		// System.out.println("It does not match");
+		// authenticationProvider.setPasswordEncoder(new ShaPasswordEncoder());
 		authenticationProvider.setUserDetailsService(loginUserService);
 		return authenticationProvider;
 	}
@@ -72,9 +77,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/", "/home","/hi/**").permitAll().antMatchers("/admin/**").hasRole("ADMIN")
-				.antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')").anyRequest().authenticated().and()
-				.formLogin().loginPage("/login").permitAll().and().logout()
+		http.authorizeRequests().antMatchers("/", "/home", "/hi/**", "/error").permitAll().antMatchers("/admin/**")
+				.hasRole("ADMIN").antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')").anyRequest()
+				.authenticated().and().formLogin().loginPage("/login").permitAll().and().logout()
 				// .logoutUrl("/my/logout")// 2
 				// .logoutSuccessUrl("/my/index") // 3
 				// .logoutSuccessHandler(logoutSuccessHandler)//4
@@ -83,12 +88,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// .deleteCookies(cookieNamesToClear) //7
 				.permitAll();
 		http.csrf().disable();
-		
-//		 http.authorizeRequests()
-//	        .antMatchers("/", "/home").access("hasRole('USER') or hasRole('ADMIN') or hasRole('DBA')")
-//	        .and().formLogin().loginPage("/login")
-//	        .usernameParameter("ssoId").passwordParameter("password")
-//	        .and().exceptionHandling().accessDeniedPage("/Access_Denied");
+
+//		http.authorizeRequests().antMatchers("/", "/home")
+//				.access("hasRole('USER') or hasRole('ADMIN') or hasRole('DBA')").and().formLogin().loginPage("/login")
+//				.usernameParameter("ssoId").passwordParameter("password").and().exceptionHandling()
+//				.accessDeniedPage("/Access_Denied").authenticationEntryPoint(new AuthenticationEntryPoint() {
+//
+//					@Override
+//					public void commence(HttpServletRequest request, HttpServletResponse response,
+//							AuthenticationException authException) throws IOException, ServletException {
+//
+//						String url = request.getRequestURI();
+//						if (url.startsWith("/api")) {
+//							response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+//						} else {
+//							response.sendRedirect("/users/login?redirectUrl=" + url);
+//						}
+//
+//					}
+//				});
 	}
 
 	// @Autowired

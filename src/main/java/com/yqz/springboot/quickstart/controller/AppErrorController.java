@@ -44,7 +44,13 @@ public class AppErrorController implements ErrorController{
      */
     @RequestMapping(value = ERROR_PATH, produces = "text/html")
     public ModelAndView errorHtml(HttpServletRequest request) {
+    	 
         return new ModelAndView("/errors/error", getErrorAttributes(request, false));
+    }
+    
+    private boolean isAjax(HttpServletRequest request) {
+        String requestedWithHeader = request.getHeader("X-Requested-With");
+        return "XMLHttpRequest".equals(requestedWithHeader);
     }
 
     /**
