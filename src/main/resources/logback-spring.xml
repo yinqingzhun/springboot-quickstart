@@ -5,7 +5,7 @@
 		converterClass="org.springframework.boot.logging.logback.ColorConverter" />
 	<property name="LOG_PATH" value="./"></property>
 	<property name="log_patteren"
-		value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger %msg%n"></property>
+		value="%d{MM-dd HH:mm:ss.SSS} %-5level [%thread] %-10logger %msg%n"></property>
 
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<!-- encoder 默认配置为PatternLayoutEncoder -->
@@ -59,7 +59,7 @@
 	</springProfile>
 
 	<springProfile name="prod">
-		<root level="info">
+		<root level="INFO">
 			<appender-ref ref="STDOUT" />
 			<appender-ref ref="daily" />
 		</root>

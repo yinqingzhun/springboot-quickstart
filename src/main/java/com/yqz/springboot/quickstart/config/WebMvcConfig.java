@@ -30,6 +30,7 @@ import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver;
 import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
 import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
+import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.ResourceBundleViewResolver;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -40,8 +41,6 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
-import com.yqz.springboot.quickstart.controller.AppErrorController;
-import com.yqz.springboot.quickstart.handler.RestHandlerExceptionResolver;
 import com.yqz.springboot.quickstart.interceptor.CaseInsensitiveRequestParameterNameFilter;
 
 @Configuration
@@ -58,13 +57,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	 * ValidationInterceptor.class)); return mapping; }
 	 */
 
-	@Autowired
-	private ErrorAttributes errorAttributes;
-
-	@Bean
-	public AppErrorController appErrorController() {
-		return new AppErrorController(errorAttributes);
-	}
+ 
 
 	@Override
 	protected PathMatchConfigurer getPathMatchConfigurer() {
@@ -228,4 +221,11 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		filter.setForceEncoding(true);
 		return filter;
 	}
+	
+	 @Bean
+	    BeanNameViewResolver beanNameViewResolver() {
+	        BeanNameViewResolver beanNameViewResolver = new BeanNameViewResolver();
+	        beanNameViewResolver.setOrder(Ordered.LOWEST_PRECEDENCE);
+	        return beanNameViewResolver;
+	    }
 }

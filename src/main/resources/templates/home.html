@@ -1,67 +1,26 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-<title>Spring Security Example</title>
+    <title>Spring Security Example</title>
 </head>
 <body>
-	<h1>Welcome!</h1>
-	<form th:action="@{/login}" method="post" th:if="${#httpServletRequest.remoteUser eq null}">
-		<div>
-			<label> User Name : <input type="text" name="username" />
-			</label>
-		</div>
-		<div>
-			<label> Password: <input type="password" name="password" />
-			</label>
-		</div>
-		<div>
-			<input type="submit" value="Sign In" />
-		</div>
-	</form>
-	<p>
-		Click <a th:href="@{/hello}">here</a> to see a greeting.
-	</p>
+<h1>Welcome!</h1>
 
-	<script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.js"></script>
-	<script type="text/javascript">
-		$(function() {
+<p th:if="${#httpServletRequest.remoteUser eq null}">
+    <a th:href="@{/login}">Login</a>
+</p>
+<p th:unless="${#httpServletRequest.remoteUser eq null}">
+<form th:action="@{/logout}" method="post">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <input type="submit" value="Sign Out"/>
+</form>
+</p>
+<p>
+    Click <a th:href="@{/hello}">here</a> to see a greeting.
+</p>
 
-			var form = $('form');
-			// Form Login Submit Event
-			form.submit(function(e) {
-				// CSRF Token
-				//var _csrf = $('meta[name="_csrf"]').attr('content');
 
-				// username
-				var username = $('input[name="username"]')[0].value;
-
-				// password
-				var password = $('input[name="password"]')[0].value;
-
-				//headers: {
-				//		'X-CSRF-TOKEN': _csrf
-				//}, 
-
-				$.ajax({
-					url : $('form').attr('action'),
-					type : "POST",
-					data : {
-						"username" : username,
-						"password" : password
-					},
-					success : function(data, textStatus, jqXHR) {
-						window.location.reload();
-					},
-					error : function(jqXHR, textStatus, errorThrown) {
-						console.log("Fail");
-					}
-				})
-
-				e.preventDefault();
-			});
-		});
-	</script>
 </body>
 </html>

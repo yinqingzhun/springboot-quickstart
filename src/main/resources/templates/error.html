@@ -22,7 +22,7 @@
 	</style>
 </head>
 <body>
-<div class="error-type">500</div>
-<div class="error-issue">抱歉，你指定的页面无法访问</div>
+<div class="error-type" th:text="${status}?:'999'"></div>
+<div class="error-issue" th:text="${message}?:'UNKNOWN ERROR'"></div>
 </body>
 </html>

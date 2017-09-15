@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
-import com.yqz.springboot.quickstart.mapper.ChatMessageMapper;
 import com.yqz.springboot.quickstart.model.po.ChatMessage;
 
 //@Secured({ "ROLE_USER", "ROLE_ADMIN" })
@@ -15,7 +14,7 @@ import com.yqz.springboot.quickstart.model.po.ChatMessage;
 @Service
 public class ChatMessageService {
 
-	@Autowired
+	/*@Autowired
 	ChatMessageMapper chatMessageMapper;
 
 	// @PostAuthorize ("returnObject.type == authentication.name")
@@ -35,5 +34,5 @@ public class ChatMessageService {
 	public Object getReceivedMessageCount() {
 		return chatMessageMapper.getReceivedMessageCount().entrySet().stream()
 				.collect(Collectors.toMap(a -> a.getKey(), a -> a.getValue().getValue()));
-	}
+	}*/
 }

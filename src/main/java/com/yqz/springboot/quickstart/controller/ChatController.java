@@ -18,27 +18,27 @@ import com.yqz.springboot.quickstart.service.ChatMessageService;
 @RestController
 @RequestMapping("/chat")
 public class ChatController {
-	@Autowired
-	ChatMessageService chatMessageService;
-
-	@GetMapping("/{id}")
-	public ChatMessage getById(@PathVariable("id") @Min(value = 1, message = "id必须为正整数") int id) {
-		return chatMessageService.getById(id);
-	}
-
-	@GetMapping("")
-	public List<ChatMessage> getAll() {
-		return chatMessageService.getAll();
-	}
-
-	@GetMapping("/ids")
-	public List<Integer> getAllIdList() {
-		return chatMessageService.getAllIdList();
-	}
-
-	@GetMapping("messageCount")
-	public Object GetAllMessageCountOfReceiver() {
-		return chatMessageService.getReceivedMessageCount();
-	}
+//	@Autowired
+//	ChatMessageService chatMessageService;
+//
+//	@GetMapping("/{id}")
+//	public ChatMessage getById(@PathVariable("id") @Min(value = 1, message = "id必须为正整数") int id) {
+//		return chatMessageService.getById(id);
+//	}
+//
+//	@GetMapping("")
+//	public List<ChatMessage> getAll() {
+//		return chatMessageService.getAll();
+//	}
+//
+//	@GetMapping("/ids")
+//	public List<Integer> getAllIdList() {
+//		return chatMessageService.getAllIdList();
+//	}
+//
+//	@GetMapping("messageCount")
+//	public Object GetAllMessageCountOfReceiver() {
+//		return chatMessageService.getReceivedMessageCount();
+//	}
 
 }

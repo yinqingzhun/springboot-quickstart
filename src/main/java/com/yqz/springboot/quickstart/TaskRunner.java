@@ -27,13 +27,13 @@ public class TaskRunner implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		JobDetail jobDetail = JobBuilder.newJob(HelloTask.class).withIdentity("helloJob", "helloGroup")
-				.usingJobData("timestamp", new Date().getTime()).build();
-
-		Trigger trigger = TriggerBuilder.newTrigger().withIdentity("myTrigger", "group1").startNow()
-				.withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInHours(10).repeatForever()).build();
-
-		schedulerFactoryBean.getObject().scheduleJob(jobDetail, trigger);
+//		JobDetail jobDetail = JobBuilder.newJob(HelloTask.class).withIdentity("helloJob", "helloGroup")
+//				.usingJobData("timestamp", new Date().getTime()).build();
+//
+//		Trigger trigger = TriggerBuilder.newTrigger().withIdentity("myTrigger", "group1").startNow()
+//				.withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInHours(10).repeatForever()).build();
+//
+//		schedulerFactoryBean.getObject().scheduleJob(jobDetail, trigger);
 	}
 
 }

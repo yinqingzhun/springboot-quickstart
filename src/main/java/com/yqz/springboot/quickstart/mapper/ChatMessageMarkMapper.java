@@ -2,7 +2,7 @@ package com.yqz.springboot.quickstart.mapper;
 
 import com.yqz.springboot.quickstart.model.po.ChatMessageMark;
 
-public interface ChatMessageMarkMapper {
+/*public interface ChatMessageMarkMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(ChatMessageMark record);
@@ -14,4 +14,4 @@ public interface ChatMessageMarkMapper {
     int updateByPrimaryKeySelective(ChatMessageMark record);
 
     int updateByPrimaryKey(ChatMessageMark record);
-}
+}*/

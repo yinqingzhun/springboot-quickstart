@@ -1,6 +1,6 @@
 package com.yqz.springboot.quickstart.data;
 
-import org.junit.Assert;
+/*import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +24,9 @@ public class RedisTest {
 	@Autowired
 	private RedisTemplate<String, Person> redisTemplate;
 
-	/*
+	*//*
 	 * @Test public void test() { fail("Not yet implemented"); }
-	 */
+	 *//*
 
 	@Test
 	public void set() throws Exception {
@@ -54,4 +54,4 @@ public class RedisTest {
 		Assert.assertEquals(op.get().getId(), 100);
 	}
 
-}
+}*/

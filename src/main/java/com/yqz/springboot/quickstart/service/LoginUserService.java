@@ -15,63 +15,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginUserService implements UserDetailsService {
 
-	private static UserDetails USER = null;
-
-	static {
-		USER = new UserDetails() {
-
-			@Override
-			public boolean isEnabled() {
-				// TODO Auto-generated method stub
-				return true;
-			}
-
-			@Override
-			public boolean isCredentialsNonExpired() {
-				// TODO Auto-generated method stub
-				return true;
-			}
-
-			@Override
-			public boolean isAccountNonLocked() {
-				// TODO Auto-generated method stub
-				return true;
-			}
-
-			@Override
-			public boolean isAccountNonExpired() {
-				// TODO Auto-generated method stub
-				return true;
-			}
-
-			@Override
-			public String getUsername() {
-				// TODO Auto-generated method stub
-				return "u";
-			}
-
-			@Override
-			public String getPassword() {
-				// TODO Auto-generated method stub
-				return "p";
-			}
-
-			@Override
-			public Collection<? extends GrantedAuthority> getAuthorities() {
-				// TODO Auto-generated method stub
-				return Arrays.asList(new GrantedAuthority() {
-
-					@Override
-					public String getAuthority() {
-						return "user";
-					}
-
-				});
-			}
-		};
-
-	}
-
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// if ("u".equalsIgnoreCase(username))
