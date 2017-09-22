@@ -87,16 +87,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/", "/home", "/hi/**", "/error").permitAll()
+        http.authorizeRequests().antMatchers("/", "/hi/**", "/error","/home").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')").anyRequest()
-                .authenticated().and().formLogin().loginPage("/login").permitAll()
-//				.loginProcessingUrl("/perform_login")
+                .authenticated()
+                .and().formLogin()
+                .loginPage("/login")
                 .defaultSuccessUrl("/home")
+                .loginProcessingUrl("/perform_login")
+                .permitAll()
                 //.successHandler(savedRequestAwareAuthenticationSuccessHandler())
                 .and().logout()
-                // .logoutUrl("/my/logout")// 2
-                // .logoutSuccessUrl("/my/index") // 3
+//                .logoutUrl("/logout")
+//                .logoutSuccessUrl("/home") // 3
                 // .logoutSuccessHandler(logoutSuccessHandler)//4
                 .invalidateHttpSession(true) // 5
                 // .addLogoutHandler(logoutHandler) // 6

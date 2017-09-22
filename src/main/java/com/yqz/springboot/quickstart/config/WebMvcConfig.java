@@ -197,11 +197,9 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/home").setViewName("home");
-		registry.addViewController("/").setViewName("home");
+		registry.addViewController("/").setViewName("forward:/home");
 		registry.addViewController("/hello").setViewName("hello");
 		registry.addViewController("/login").setViewName("login");
-		registry.addViewController("/upload").setViewName("upload");
-		registry.addViewController("/editor").setViewName("editor");
 	}
 	@Bean
 	public CaseInsensitiveRequestParameterNameFilter caseInsensitiveRequestParameterNameFilter() {

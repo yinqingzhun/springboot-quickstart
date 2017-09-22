@@ -1,77 +1,48 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>Spring Security Example </title>
-    </head>
-    <body>
-        <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form th:action="@{/login}" method="post" th:if="${#httpServletRequest.remoteUser eq null}">
-            <div>
-                <label> User Name : <input type="text" name="username" />
-                </label>
-            </div>
-            <div>
-                <label> Password: <input type="password" name="password" />
-                </label>
-            </div>
-            <div>
-                <label> Remember: <input type="checkbox" name="remember-me" />
-                </label>
-            </div>
-            <div>
-                <input type="submit" value="Sign In" />
-            </div>
-        </form>
-        <p th:unless="${#httpServletRequest.remoteUser eq null}">
-            You have successfully logged in. <form th:action="@{/logout}" method="post">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input type="submit" value="Sign Out"/>
-        </form>
-        </p>
-        <script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.js"></script>
-        <script type="text/javascript">
-            $(function() {
+<head>
+    <title>Login And Logout Page</title>
+    <style type="text/css">
+        form label {
+            display: inline-block;
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+<div th:if="${param.error}">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}">
+    You have been logged out.
+</div>
+<h3 th:if="${#httpServletRequest.remoteUser eq null}">Login with Username and Password</h3>
+<form id="login" th:action="@{/perform_login}" method="post" th:if="${#httpServletRequest.remoteUser eq null}">
+    <div>
+        <label> User Name : <input type="text" name="username"/>
+        </label>
+    </div>
+    <div>
+        <label> Password: <input type="password" name="password"/>
+        </label>
+    </div>
+    <div>
+        <label> Remember: <input type="checkbox" name="remember-me"/>
+        </label>
+    </div>
+    <div>
+        <input type="submit" value="Sign In"/>
+    </div>
+</form>
+<p th:unless="${#httpServletRequest.remoteUser eq null}">
+    You have successfully logged in.
+<form th:action="@{/logout}" method="post">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <input type="submit" value="Sign Out"/>
+</form>
+</p>
+<script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.js"></script>
 
-                var form = $('form');
-                // Form Login Submit Event
-                form.submit(function(e) {
-                    // CSRF Token
-                    //var _csrf = $('meta[name="_csrf"]').attr('content');
-
-                    // username
-                    var username = $('input[name="username"]')[0].value;
-
-                    // password
-                    var password = $('input[name="password"]')[0].value;
-
-                    //headers: {
-                    //		'X-CSRF-TOKEN': _csrf
-                    //},
-
-                    $.ajax({
-                        url : $('form').attr('action'),
-                        type : "POST",
-                        data : {
-                            "username" : username,
-                            "password" : password
-                        },
-                        success : function(data, textStatus, jqXHR) {
-                            window.location.reload();
-                        },
-                        error : function(jqXHR, textStatus, errorThrown) {
-                            console.log("Fail");
-                        }
-                    })
-
-                    e.preventDefault();
-                });
-            });
-        </script>
-    </body>
+</body>
 </html>

@@ -3,13 +3,38 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Spring Security Example</title>
+    <title>Hello Page</title>
+    <style type="text/css">
+        form label {
+            display: inline-block;
+            width: 120px;
+        }
+    </style>
 </head>
 <body>
 <h1>Welcome!</h1>
 
+<p th:if="${#httpServletRequest.remoteUser eq null}" style="display: none;">
+    Click <a th:href="@{/login}">here</a> to direct to login page
+</p>
 <p th:if="${#httpServletRequest.remoteUser eq null}">
-    <a th:href="@{/login}">Login</a>
+<form id="login" th:action="@{/perform_login}" method="post" th:if="${#httpServletRequest.remoteUser eq null}">
+    <div>
+        <label> User Name : <input type="text" name="username"/>
+        </label>
+    </div>
+    <div>
+        <label> Password: <input type="password" name="password"/>
+        </label>
+    </div>
+    <div>
+        <label> Remember: <input type="checkbox" name="remember-me"/>
+        </label>
+    </div>
+    <div>
+        <input type="submit" value="Sign In"/>
+    </div>
+</form>
 </p>
 <p th:unless="${#httpServletRequest.remoteUser eq null}">
 <form th:action="@{/logout}" method="post">
@@ -20,7 +45,44 @@
 <p>
     Click <a th:href="@{/hello}">here</a> to see a greeting.
 </p>
+<script type="text/javascript">
+    $(function () {
 
+        var form = $('#login');
+        // Form Login Submit Event
+        form.submit(function (e) {
+            // CSRF Token
+            //var _csrf = $('meta[name="_csrf"]').attr('content');
+
+            // username
+            var username = $('input[name="username"]')[0].value;
+
+            // password
+            var password = $('input[name="password"]')[0].value;
+
+            //headers: {
+            //		'X-CSRF-TOKEN': _csrf
+            //},
+
+            $.ajax({
+                url: $('form').attr('action'),
+                type: "POST",
+                data: {
+                    "username": username,
+                    "password": password
+                },
+                success: function (data, textStatus, jqXHR) {
+                    window.location.reload();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("Fail");
+                }
+            })
+
+            e.preventDefault();
+        });
+    });
+</script>
 
 </body>
 </html>

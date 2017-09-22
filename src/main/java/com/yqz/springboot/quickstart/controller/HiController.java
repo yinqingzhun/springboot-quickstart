@@ -36,7 +36,7 @@ import com.yqz.springboot.quickstart.service.HelloService;
 @Validated
 @Controller
 @RequestMapping("hi")
-public class HiController extends BaseController {
+public class HiController {
     Logger logger = LoggerFactory.getLogger(HiController.class);
     @Autowired
     HelloService helloService;
